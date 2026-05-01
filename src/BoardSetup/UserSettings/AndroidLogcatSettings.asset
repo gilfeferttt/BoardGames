@@ -3,7 +3,7 @@
     "m_SelectedProcess": {
         "deviceId": "RFCR30FNKME",
         "name": "com.twintera.boardsetup",
-        "processId": 24623,
+        "processId": 22239,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -918,6 +918,12 @@
             "deviceId": "RFCR30FNKME",
             "name": "com.twintera.boardsetup",
             "processId": 24623,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 22239,
             "exited": false
         }
     ],
