@@ -3,7 +3,7 @@
     "m_SelectedProcess": {
         "deviceId": "RFCR30FNKME",
         "name": "com.twintera.timetrooper",
-        "processId": 27326,
+        "processId": 13510,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -157,6 +157,120 @@
             "name": "com.twintera.timetrooper",
             "processId": 27326,
             "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 4969,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 6373,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 9390,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 10364,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 11292,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 12203,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 13002,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 14190,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 15496,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 16156,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 15158,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 16069,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 16557,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 17482,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 18120,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 18927,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 20156,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 15188,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.timetrooper",
+            "processId": 13510,
+            "exited": false
         }
     ],
     "m_Tags": {
@@ -213,7 +327,7 @@
         "AutoCapture": true
     },
     "m_FilterOptions": {
-        "m_Filter": "troppermanagerUI.tropperssetup.Count",
+        "m_Filter": "",
         "m_UseRegularExpressions": false,
         "m_MatchCase": false
     },

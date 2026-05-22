@@ -51,6 +51,6 @@ public class SwipeDetector : MonoBehaviour, IEndDragHandler, IPointerDownHandler
     private void OnSwipeLeft()
     {
         Debug.Log("LEFT SWIPE DETECTED!");
-        GameStateManager.instance.ChangeToGetInstructions();
+        GameStateManagerMulti.instance.ChangeToGetInstructions();
     }
 }

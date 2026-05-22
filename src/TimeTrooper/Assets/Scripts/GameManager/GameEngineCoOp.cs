@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using static Board;
-using static BoardBase;
+using static BoardCoOp;
 
-public class GameEngine : IEnumerable<GameRound>
+public class GameEngineCoOp : IEnumerable<GameRound>
 {
     List<GameRound> gameRounds;
     public int timeToPlay { get; set; }
@@ -42,7 +41,7 @@ public class GameEngine : IEnumerable<GameRound>
     public static int minNumberOfPlayers = 2;
     public static int maxNumberOfPlayers = 4;
 
-    public GameEngine(GameDificulty gameDificulty, GameData gamedata)
+    public GameEngineCoOp(GameDificulty gameDificulty, GameDataCoOp gamedata)
     {
         currentGameDificulty = gameDificulty;
         currentTimeToDisappear = -1;
@@ -52,26 +51,16 @@ public class GameEngine : IEnumerable<GameRound>
         int numberOfRoundConfigured = 0;
         int numberOfRoundConfiguredMin = 0;
         bonusMultiplier = 1;
-        if (gameDificulty == GameDificulty.Basic || gameDificulty == GameDificulty.Expert)
+        if (gameDificulty == GameDificulty.Basic)
         {
-            nextGameDificulty = GameDificulty.Advanced;
+            nextGameDificulty = GameDificulty.Master;
             currentGameDificultyName = "Basic";
-            nextGameDificultyName = "Advanced";
+            nextGameDificultyName = "Master";
             bonusMultiplier = 1;
             numberOfRoundConfigured = Convert.ToInt32(gamedata.basicNumOfRounds);
             numberOfRoundConfiguredMin = Convert.ToInt32(gamedata.basicNumOfRoundsMin);
             timeToPlay = Convert.ToInt32(gamedata.basicWaitTime);
-            if (gameDificulty == GameDificulty.Expert)
-            {
-                timeToPlay = Convert.ToInt32(gamedata.expertWaitTime);
-                bonusMultiplier = 2;
-                numberOfRoundConfigured = Convert.ToInt32(gamedata.expertNumOfRounds);
-                numberOfRoundConfiguredMin = Convert.ToInt32(gamedata.expertNumOfRoundsMin);
-
-                nextGameDificulty = GameDificulty.Master;
-                currentGameDificultyName = "expert";
-                nextGameDificultyName = "Master";
-            }
+            
             tempGameRounds.Add(new GameRound(1, "Round 1", 1, 10, 5));
             tempGameRounds.Add(new GameRound(2, "Round 2", 2, 10, 10));
             tempGameRounds.Add(new GameRound(3, "Round 3", 3, 10, 15));
@@ -82,25 +71,16 @@ public class GameEngine : IEnumerable<GameRound>
             tempGameRounds.Add(new GameRound(8, "Round 8", 8, 10, 40));
             tempGameRounds.Add(new GameRound(9, "Round 9", 9, 10, 45));
         }
-        else if (gameDificulty == GameDificulty.Advanced || gameDificulty == GameDificulty.Master)
+        else if (gameDificulty == GameDificulty.Master)
         {
-            nextGameDificulty = GameDificulty.Expert;
-            currentGameDificultyName = "Advanced";
-            nextGameDificultyName = "Expert";
-            numberOfRoundConfigured = Convert.ToInt32(gamedata.advancedNumOfRounds);
-            numberOfRoundConfiguredMin = Convert.ToInt32(gamedata.advancedNumOfRoundsMin);
-            bonusMultiplier = 1.5;
-            timeToPlay = Convert.ToInt32(gamedata.advancedWaitTime);
-            if (gameDificulty == GameDificulty.Master)
-            {
-                nextGameDificulty = GameDificulty.Elite;
-                currentGameDificultyName = "Master";
-                nextGameDificultyName = "Elite";
-                timeToPlay = Convert.ToInt32(gamedata.masterWaitTime);
-                bonusMultiplier = 2.5;
-                numberOfRoundConfigured = Convert.ToInt32(gamedata.masterNumOfRounds);
-                numberOfRoundConfiguredMin = Convert.ToInt32(gamedata.masterNumOfRoundsMin);
-            }
+            nextGameDificulty = GameDificulty.Legendary;
+            currentGameDificultyName = "Master";
+            nextGameDificultyName = "Legendary";
+            timeToPlay = Convert.ToInt32(gamedata.masterWaitTime);
+            bonusMultiplier = 2.5;
+            numberOfRoundConfigured = Convert.ToInt32(gamedata.masterNumOfRounds);
+            numberOfRoundConfiguredMin = Convert.ToInt32(gamedata.masterNumOfRoundsMin);
+            
             tempGameRounds.Add(new GameRound(1, "Round 1", 1, 10, 5));
             tempGameRounds.Add(new GameRound(2, "Round 2", 2, 20, 10));
             tempGameRounds.Add(new GameRound(3, "Round 3", 3, 30, 15));
@@ -110,26 +90,6 @@ public class GameEngine : IEnumerable<GameRound>
             tempGameRounds.Add(new GameRound(7, "Round 7", 7, 70, 35));
             tempGameRounds.Add(new GameRound(8, "Round 8", 8, 80, 40));
             tempGameRounds.Add(new GameRound(9, "Round 9", 9, 90, 45));
-        }
-        else if (gameDificulty == GameDificulty.Elite)
-        {
-            currentTimeToDisappear = Convert.ToInt32(gamedata.eliteTimeToDisappear);
-            nextGameDificulty = GameDificulty.Legendary;
-            currentGameDificultyName = "Elite";
-            nextGameDificultyName = "Legendary";
-            numberOfRoundConfigured = Convert.ToInt32(gamedata.eliteNumOfRounds);
-            numberOfRoundConfiguredMin = Convert.ToInt32(gamedata.eliteNumOfRoundsMin);
-            bonusMultiplier = 3;
-            timeToPlay = Convert.ToInt32(gamedata.eliteWaitTime);
-            tempGameRounds.Add(new GameRound(1, "Round 1", 1, 10, 5));
-            tempGameRounds.Add(new GameRound(2, "Round 2", 2, 10, 10));
-            tempGameRounds.Add(new GameRound(3, "Round 3", 3, 10, 15));
-            tempGameRounds.Add(new GameRound(4, "Round 4", 4, 10, 20));
-            tempGameRounds.Add(new GameRound(5, "Round 5", 5, 10, 25));
-            tempGameRounds.Add(new GameRound(6, "Round 6", 6, 10, 30));
-            tempGameRounds.Add(new GameRound(7, "Round 7", 7, 10, 35));
-            tempGameRounds.Add(new GameRound(8, "Round 8", 8, 10, 40));
-            tempGameRounds.Add(new GameRound(9, "Round 9", 9, 10, 45));
         }
         else if (gameDificulty == GameDificulty.Legendary)
         {
@@ -151,11 +111,11 @@ public class GameEngine : IEnumerable<GameRound>
             tempGameRounds.Add(new GameRound(8, "Round 8", 8, 10, 40));
             tempGameRounds.Add(new GameRound(9, "Round 9", 9, 10, 45));
         }
-        if(numberOfRoundConfigured > tempGameRounds.Count)
+        if (numberOfRoundConfigured > tempGameRounds.Count)
         {
             numberOfRoundConfigured = tempGameRounds.Count;
         }
-        for(int x = numberOfRoundConfiguredMin - 1; x< numberOfRoundConfigured; x++)
+        for (int x = numberOfRoundConfiguredMin - 1; x < numberOfRoundConfigured; x++)
         {
             gameRounds.Add(tempGameRounds[x]);
         }

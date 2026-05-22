@@ -3,7 +3,7 @@
     "m_SelectedProcess": {
         "deviceId": "RFCR30FNKME",
         "name": "com.twintera.gamecenter",
-        "processId": 4408,
+        "processId": 24743,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -96,6 +96,12 @@
             "deviceId": "RFCR30FNKME",
             "name": "com.twintera.gamecenter",
             "processId": 4408,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.gamecenter",
+            "processId": 24743,
             "exited": false
         }
     ],

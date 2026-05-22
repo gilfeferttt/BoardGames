@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SwipeDetectorInstructions : MonoBehaviour, IEndDragHandler, IPointerDownHandler, IBeginDragHandler, IDragHandler
+public class SwipeDetectorCoOp : MonoBehaviour, IEndDragHandler, IPointerDownHandler, IBeginDragHandler, IDragHandler
 {
     public float minSwipeDistance = 50f; // Pixels: Ignore short drags
 
@@ -51,6 +51,6 @@ public class SwipeDetectorInstructions : MonoBehaviour, IEndDragHandler, IPointe
     private void OnSwipeLeft()
     {
         Debug.Log("LEFT SWIPE DETECTED!");
-        GameStateManagerMulti.instance.ChangeToGetDificulty();
+        GameStateManagerCoOp.instance.ChangeToGetInstructions();
     }
 }

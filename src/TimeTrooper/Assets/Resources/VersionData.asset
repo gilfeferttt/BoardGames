@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: VersionData
   m_EditorClassIdentifier: Assembly-CSharp-Editor::VersionData
   displayVersion: 3.0.0
-  buildNumber: 56
+  buildNumber: 88

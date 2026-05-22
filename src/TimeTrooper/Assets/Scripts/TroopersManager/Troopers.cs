@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static BoardBase;
 
 public class Troopers : MonoBehaviour
 {
@@ -8,7 +9,9 @@ public class Troopers : MonoBehaviour
     {
         first = 1,
         second = 2,
-        third = 3
+        third = 3,
+        forth = 4,
+        fifth = 5
     }
     [SerializeField] private RawImage Octagon;
     [SerializeField] private RawImage OctagonTransparent;
@@ -65,6 +68,8 @@ public class Troopers : MonoBehaviour
     public List<Trooper> alltroopers { get; set; }
 
     public static Troopers instance;
+    private float rescaleTrooper = 0f;
+    GameMode currentGameMode;
 
     private void Awake()
     {
@@ -263,8 +268,172 @@ public class Troopers : MonoBehaviour
             )
         };
         tropperSets.Add((int)tropperSet.third, alltroopers);
-    }
 
+
+
+
+
+        // new3 - Blue
+        alltroopers = new List<Trooper>()
+        {
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(Octagon, OctagonTransparent, new RFIDTag("254240077239")),
+                    new TwinteraGameObject(Rectangle, RectangleTransparent, new RFIDTag("014243083239"))
+                }
+            ),
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(CircleCross, CircleCrossTransparent, new RFIDTag("046073084239")),
+                    new TwinteraGameObject(HalfCircle8, HalfCircleTransparent8, new RFIDTag("126226082239"))
+                }
+            ),
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(Triangular8, TriangularTransparent8, new RFIDTag("030029077239")),
+                    new TwinteraGameObject(Triangular4, TriangularTransparent4, new RFIDTag("190191083239"))
+                }
+            ),
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(Hart, HartTransparent, new RFIDTag("062198083239")),
+                    new TwinteraGameObject(Skull, SkullTransparent, new RFIDTag("094030085239"))
+                }
+            ),
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(RoundTriangular4, RoundTriangularTransparent4, new RFIDTag("046136068239")),
+                    new TwinteraGameObject(Trapez2, TrapezTransparent2, new RFIDTag("190061085239"))
+                }
+            ),
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(Circle, CircleTransparent, new RFIDTag("206039085239")),
+                    new TwinteraGameObject(HalfCircle3, HalfCircleTransparent3, new RFIDTag("238015073239"))
+                }
+            ),
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(Triangular, TriangularTransparent, new RFIDTag("174061077239")),
+                    new TwinteraGameObject(Hexagon, HexagonTransparent, new RFIDTag("126129080239"))
+                }
+            ),
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(Cross, CrossTransparent, new RFIDTag("190199082239")),
+                    new TwinteraGameObject(Cross8, CrossTransparent8, new RFIDTag("222211083239"))
+                }
+            ),
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(HalfCircle2, HalfCircleTransparent2, new RFIDTag("094223066239")),
+                    new TwinteraGameObject(HalfCircle4, HalfCircleTransparent4, new RFIDTag("174121078239"))
+                }
+            )
+        };
+        tropperSets.Add((int)tropperSet.forth, alltroopers);
+
+
+
+
+
+
+        // new4 - Orange
+        alltroopers = new List<Trooper>()
+        {
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(Octagon, OctagonTransparent, new RFIDTag("0")),
+                    new TwinteraGameObject(Rectangle, RectangleTransparent, new RFIDTag("0"))
+                }
+            ),
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(CircleCross, CircleCrossTransparent, new RFIDTag("0")),
+                    new TwinteraGameObject(HalfCircle8, HalfCircleTransparent8, new RFIDTag("0"))
+                }
+            ),
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(Triangular8, TriangularTransparent8, new RFIDTag("094221084239")),
+                    new TwinteraGameObject(Triangular4, TriangularTransparent4, new RFIDTag("158055052239"))
+                }
+            ),
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(Hart, HartTransparent, new RFIDTag("222081085239")),
+                    new TwinteraGameObject(Skull, SkullTransparent, new RFIDTag("206023078239"))
+                }
+            ),
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(RoundTriangular4, RoundTriangularTransparent4, new RFIDTag("110048083239")),
+                    new TwinteraGameObject(Trapez2, TrapezTransparent2, new RFIDTag("062176065239"))
+                }
+            ),
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(Circle, CircleTransparent, new RFIDTag("046029070239")),
+                    new TwinteraGameObject(HalfCircle3, HalfCircleTransparent3, new RFIDTag("190187072239"))
+                }
+            ),
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(Triangular, TriangularTransparent, new RFIDTag("238012066239")),
+                    new TwinteraGameObject(Hexagon, HexagonTransparent, new RFIDTag("2541890522239"))
+                }
+            ),
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(Cross, CrossTransparent, new RFIDTag("126156085239")),
+                    new TwinteraGameObject(Cross8, CrossTransparent8, new RFIDTag("110093073239"))
+                }
+            ),
+            new Trooper(new List<TwinteraGameObject>
+                {
+                    new TwinteraGameObject(HalfCircle2, HalfCircleTransparent2, new RFIDTag("238088073239")),
+                    new TwinteraGameObject(HalfCircle4, HalfCircleTransparent4, new RFIDTag("254191065239"))
+                }
+            )
+        };
+        tropperSets.Add((int)tropperSet.fifth, alltroopers);
+    }
+    public void setTroppersScale(GameMode gameMode)
+    {
+        Debug.Log("Enter setTroppersScale()");
+        try
+        {
+            currentGameMode = gameMode;
+            if(gameMode == GameMode.CoOpMode)
+            {
+                rescaleTrooper = 1.5f;
+            } else
+            {
+                rescaleTrooper = 2.0f;
+            }
+            foreach (List<Trooper> allrtoopers in tropperSets.Values)
+            {
+                foreach (Trooper trooper in alltroopers)
+                {
+                    foreach (TwinteraGameObject twinteraGameObject in trooper.GameObjects)
+                    {
+                        twinteraGameObject.GameImage.rectTransform.localScale = new Vector3(rescaleTrooper, rescaleTrooper, 1f);
+                        twinteraGameObject.GameImageTransparent.rectTransform.localScale = new Vector3(rescaleTrooper, rescaleTrooper, 1f);
+                    }
+
+                }
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error: " + e.Message);
+            throw e;
+        }
+        finally
+        {
+            Debug.Log("Exit setTroppersScale()");
+        }
+    }
     public List<Trooper> getNextTroppers(int numberoftroopers, bool random)
     {
         List<Trooper> troopers = new List<Trooper>();
@@ -310,19 +479,27 @@ public class Troopers : MonoBehaviour
     }
     public int getTrooperSetByTagID(string tagid)
     {
-        Trooper thetrooper = null;
-        int tropperset = 0;
-        foreach (int tropset in tropperSets.Keys)
+        Debug.Log("Enter getTrooperSetByTagID(tagid) " + tagid);
+        try
         {
-            tropperset = tropset;
-            alltroopers = (List<Trooper>)tropperSets[tropset];
-            foreach (Trooper trooper in alltroopers)
+            Trooper thetrooper = null;
+            int tropperset = 0;
+            foreach (int tropset in tropperSets.Keys)
             {
-                foreach (TwinteraGameObject twinteraGameObject in trooper.GameObjects)
+                tropperset = tropset;
+                alltroopers = (List<Trooper>)tropperSets[tropset];
+                foreach (Trooper trooper in alltroopers)
                 {
-                    if (twinteraGameObject.Tag.SerialNumber.CompareTo(tagid) == 0)
+                    foreach (TwinteraGameObject twinteraGameObject in trooper.GameObjects)
                     {
-                        thetrooper = trooper;
+                        if (twinteraGameObject.Tag.SerialNumber.CompareTo(tagid) == 0)
+                        {
+                            thetrooper = trooper;
+                            break;
+                        }
+                    }
+                    if (thetrooper != null)
+                    {
                         break;
                     }
                 }
@@ -331,16 +508,34 @@ public class Troopers : MonoBehaviour
                     break;
                 }
             }
-            if (thetrooper != null)
-            {
-                break;
-            }
+            return tropperset;
         }
-        return tropperset;
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error: " + e.Message);
+            throw e;
+        }
+        finally
+        {
+            Debug.Log("Exit getTrooperSetByTagID()");
+        }
     }
     public void setTropperSet(int tropperset)
     {
-        alltroopers = (List<Trooper>)tropperSets[tropperset];
+        Debug.Log("Enter setTropperSet(tropperset) " + tropperset);
+        try
+        {
+            alltroopers = (List<Trooper>)tropperSets[tropperset];
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error: " + e.Message);
+            throw e;
+        }
+        finally
+        {
+            Debug.Log("Exit setTropperSet()");
+        }
     }
     // Update is called once per frame
     void Update()

@@ -1,27 +1,22 @@
-using System;
+﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using TMPro;
-using UnityEngine;
-using System.Threading.Tasks;
-using UnityEngine.Video;
-using static BoardSetupMulti;
 using UnityEngine.UI;
-using System.Linq;
+using System.IO;
+using System;
+using System.Collections.Generic;
 
-public class Board : BoardBase
+public class BoardCoOp : BoardBase
 {
     public enum GameDificulty
     {
         None,
         Basic,
-        Advanced,
-        Expert,
         Master,
-        Elite,
         Legendary
     }
+
+
 
     public Material ringMaterial;
 
@@ -54,10 +49,10 @@ public class Board : BoardBase
         SameTagSameOrder = 4
     }
     
-    GameDificulty gameDificulty;
+    //GameDificulty gameDificulty;
 
     //Troopers troopers;
-    BoardSetupMulti boardSetup;
+    BoardSetupCoOp boardSetup;
     List<Tile> nextTiles;
     List<Tile> currentTiles;
 
@@ -70,31 +65,31 @@ public class Board : BoardBase
     [SerializeField] private TMP_Text countdownText;
     int countdownCounter;
 
-    public static Board instance;
-    public VideoPlayer videoPlayer;
+    //public static Board instance;
+    //public VideoPlayer videoPlayer;
 
     [SerializeField]
     private TMP_InputField[] playersNames;
 
-    [SerializeField] private TMP_Text[] bannerPlayersNames;
-    [SerializeField] private RawImage[] Turns;
-    [SerializeField] private TMP_Text[] bannerPlayersPoints;
-    [SerializeField] private RawImage[] Harts;
-    [SerializeField] private RawImage[] Stars;
+    //[SerializeField] private TMP_Text[] bannerPlayersNames;
+    //[SerializeField] private RawImage[] Turns;
+    //[SerializeField] private TMP_Text[] bannerPlayersPoints;
+    //[SerializeField] private RawImage[] Harts;
+    //s[SerializeField] private RawImage[] Stars;
 
     [SerializeField] private TMP_Text demoscreenPlayer1Name;
     [SerializeField] private TMP_Text demoscreenPlayer2Name;
 
     [SerializeField] private TMP_Text txtBattery;
 
-    private PlayerData playerdata;
-    private string playerfilePath;
+    //private PlayerData playerdata;
+    //private string playerfilePath;
     private PPUManager ppumanager;
 
-    private GameData gamedata;
-    private string gamefilePath;
+   // private GameData gamedata;
+    //private string gamefilePath;
 
-    
+
 
     [SerializeField] private TMP_Text txtRound;
     [SerializeField] private TMP_Text txtTrooperNumber;
@@ -110,8 +105,8 @@ public class Board : BoardBase
     TroopersManager troppermanagerUI;
     TroopersManager troppermanagerPreviouseUI;
     TroopersManager troppermanagerPPU;
-    GameEngine gameengine;
-    PlayersEngine playersengine;
+    //GameEngine gameengine;
+    //PlayersEngine playersengine;
     List<Trooper> currenttroopers;
     GameRound currentround = null;
     Player currentplayer = null;
@@ -122,9 +117,9 @@ public class Board : BoardBase
     [SerializeField] private TMP_Text txtSimulatorRight;
 
     [SerializeField] private Button btnSimulatorTag;
-        
+
     private bool noNeedToDetectAgain = true;
-    
+
 
     Coroutine maketagdetectCoroutine = null;
 
@@ -150,27 +145,27 @@ public class Board : BoardBase
     bool tropperStillDetecting = true;
 
     [SerializeField] private TMP_InputField basicWaitTime;
-    [SerializeField] private TMP_InputField advancedWaitTime;
-    [SerializeField] private TMP_InputField expertWaitTime;
+    //[SerializeField] private TMP_InputField advancedWaitTime;
+    //[SerializeField] private TMP_InputField expertWaitTime;
     [SerializeField] private TMP_InputField masterWaitTime;
-    [SerializeField] private TMP_InputField eliteWaitTime;
+    //[SerializeField] private TMP_InputField eliteWaitTime;
     [SerializeField] private TMP_InputField legendaryWaitTime;
 
     [SerializeField] private TMP_InputField basicNumOfRounds;
-    [SerializeField] private TMP_InputField advancedNumOfRounds;
-    [SerializeField] private TMP_InputField expertNumOfRounds;
+    //[SerializeField] private TMP_InputField advancedNumOfRounds;
+    //[SerializeField] private TMP_InputField expertNumOfRounds;
     [SerializeField] private TMP_InputField masterNumOfRounds;
-    [SerializeField] private TMP_InputField eliteNumOfRounds;
+    //[SerializeField] private TMP_InputField eliteNumOfRounds;
     [SerializeField] private TMP_InputField legendaryNumOfRounds;
 
     [SerializeField] private TMP_InputField basicNumOfRoundsMin;
-    [SerializeField] private TMP_InputField advancedNumOfRoundsMin;
-    [SerializeField] private TMP_InputField expertNumOfRoundsMin;
+    //[SerializeField] private TMP_InputField advancedNumOfRoundsMin;
+    //[SerializeField] private TMP_InputField expertNumOfRoundsMin;
     [SerializeField] private TMP_InputField masterNumOfRoundsMin;
-    [SerializeField] private TMP_InputField eliteNumOfRoundsMin;
+    //[SerializeField] private TMP_InputField eliteNumOfRoundsMin;
     [SerializeField] private TMP_InputField legendaryNumOfRoundsMin;
 
-    [SerializeField] private TMP_InputField eliteTimeToDisappear;
+   // [SerializeField] private TMP_InputField eliteTimeToDisappear;
     [SerializeField] private TMP_InputField legendaryTimeToDisappear;
 
     [SerializeField] private TMP_Text isTagDetected;
@@ -189,7 +184,85 @@ public class Board : BoardBase
     int[] currentAntennaLocations;
     string lastDetectedMessage;
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static BoardCoOp instance;
+
+    [SerializeField] private TMP_Text bannerTeamName;
+    //[SerializeField] private RawImage Turns;
+    [SerializeField] private TMP_Text bannerTeamPoints;
+    //[SerializeField] private RawImage Harts;
+   // [SerializeField] private RawImage Stars;
+
+    private int numberofteammember = 0;
+    [SerializeField] private Slider sliderNumberOfTeamMember;
+    [SerializeField] private TMP_Text txtNumberOfTeamMember;
+    [SerializeField] private TMP_InputField teamName;
+
+    //[SerializeField] private TMP_InputField basicWaitTime;
+    //[//SerializeField] private TMP_InputField masterWaitTime;
+    //[SerializeField] private TMP_InputField legendaryWaitTime;
+    //[SerializeField] private TMP_InputField basicNumOfRounds;
+    //[SerializeField] private TMP_InputField masterNumOfRounds;
+    //[SerializeField] private TMP_InputField legendaryNumOfRounds;
+    //[SerializeField] private TMP_InputField basicNumOfRoundsMin;
+    //[SerializeField] private TMP_InputField masterNumOfRoundsMin;
+    //[SerializeField] private TMP_InputField legendaryNumOfRoundsMin;
+    //[SerializeField] private TMP_InputField legendaryTimeToDisappear;
+
+    GameDificulty gameDificulty;
+    //int startroundCountdownSteps = 7;
+    //List<object> trooperObjectToDisapear;
+
+
+
+
+    //float startroundTotalTime = 7;
+    //
     
+    GameEngineCoOp gameengine;
+    PlayersEngine playersengine;
+    //[SerializeField] protected GameObject troopersUI;
+   // bool getTrooperRandomally = false;
+   // bool orderTrooperMetter = false;
+   // bool trooperDisappear = false;
+  //  Dictionary<string, string> detectTagsOrdered;
+  //  Dictionary<string, string> detectTagsOrderedScore;
+
+  //  bool ingamenames = false;
+  //  int currenttropperset = 0;
+
+    
+
+    private GameDataCoOp gamedata;
+    private string gamefilePath;
+    
+    private PlayerDataCoOp playerdata;
+    private string playerfilePath;
 
     private void Awake()
     {
@@ -202,77 +275,36 @@ public class Board : BoardBase
         {
             Destroy(gameObject);
         }
-        
-        basicWaitTime.contentType = TMP_InputField.ContentType.IntegerNumber;
-        advancedWaitTime.contentType = TMP_InputField.ContentType.IntegerNumber;
-        expertWaitTime.contentType = TMP_InputField.ContentType.IntegerNumber;
-        masterWaitTime.contentType = TMP_InputField.ContentType.IntegerNumber;
-        eliteWaitTime.contentType = TMP_InputField.ContentType.IntegerNumber;
-        legendaryWaitTime.contentType = TMP_InputField.ContentType.IntegerNumber;
-
-        eliteTimeToDisappear.contentType = TMP_InputField.ContentType.IntegerNumber;
-        legendaryTimeToDisappear.contentType = TMP_InputField.ContentType.IntegerNumber;
-
-        numberOfPlayers.characterLimit = 1;
-        numberOfPlayers.onValidateInput = ValidateInputNumberOfPlayers;
-
-        basicNumOfRoundsMin.onValidateInput = ValidateInputNumberOfLevels;
-        advancedNumOfRoundsMin.onValidateInput = ValidateInputNumberOfLevels;
-        expertNumOfRoundsMin.onValidateInput = ValidateInputNumberOfLevels;
-        masterNumOfRoundsMin.onValidateInput = ValidateInputNumberOfLevels;
-        eliteNumOfRoundsMin.onValidateInput = ValidateInputNumberOfLevels;
-        legendaryNumOfRoundsMin.onValidateInput = ValidateInputNumberOfLevels;
-
-        basicNumOfRounds.onValidateInput = ValidateInputNumberOfLevels;
-        advancedNumOfRounds.onValidateInput = ValidateInputNumberOfLevels;
-        expertNumOfRounds.onValidateInput = ValidateInputNumberOfLevels;
-        masterNumOfRounds.onValidateInput = ValidateInputNumberOfLevels;
-        eliteNumOfRounds.onValidateInput = ValidateInputNumberOfLevels;
-        legendaryNumOfRounds.onValidateInput = ValidateInputNumberOfLevels;
     }
-    private char ValidateInputNumberOfPlayers(string text, int charIndex, char addedChar)
+    // Number of player on a team
+    private void OnTeamMemberChanged(float value)
     {
-        if (addedChar == '2' || addedChar == '3' || addedChar == '4')
+        Debug.Log("Enter OnTeamMemberChanged()");
+        try
         {
-            return addedChar;
+            txtNumberOfTeamMember.text = value.ToString() + " players";
+            numberofteammember = ((int)value);
         }
-
-        return '\0';
-    }
-    private char ValidateInputNumberOfLevels(string text, int charIndex, char addedChar)
-    {
-        if (addedChar == '0') 
+        catch (System.Exception e)
         {
-            return '\0';
+            Debug.LogError("Error: " + e.Message);
         }
-        return addedChar;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        if (isPaused)
+        finally
         {
-            // Beautiful smooth sine flicker
-            float alpha = Mathf.Lerp(minAlpha, maxAlpha,
-                (Mathf.Sin(Time.time * speed) + 1f) * 0.5f);
-
-            Color c = txtPauseGame.color;
-            c.a = alpha;
-            txtPauseGame.color = c;
+            Debug.Log("Exit OnTeamMemberChanged()");
         }
     }
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Use this for initialization
     void Start()
     {
-        Debug.Log("Enter Start()");
+        Debug.Log("Enter Start() BoardCoOp");
         try
         {
             lastDetectedMessage = null;
 
             base.Start();
 
-            if(competitiveMode == true)
+            if (competitiveMode == true)
             {
 
             }
@@ -288,10 +320,10 @@ public class Board : BoardBase
             troppermanagerUI = new TroopersManager();
             troppermanagerPreviouseUI = new TroopersManager();
             troppermanagerPPU = new TroopersManager();
-            
+
             ppumanager = new PPUManager(emulator);
             ppumanager.ConnectToPPU(gameObject.name);
-            if(ppumanager.boardConnectStatus == 0)
+            if (ppumanager.boardConnectStatus == 0)
             {
                 Debug.Log("Board is connected");
             }
@@ -299,7 +331,8 @@ public class Board : BoardBase
             {
                 Debug.Log("Board runs in emulation mode");
                 base.emulator = true;
-            } else
+            }
+            else
             {
                 Debug.Log("Board is not yet connected");
             }
@@ -312,24 +345,20 @@ public class Board : BoardBase
 
             if (ppumanager.boardConnectStatus == 0 || ppumanager.boardConnectStatus == 1)
             {
-                playerfilePath = Path.Combine(Application.persistentDataPath, "playerdata.json");
-                gamefilePath = Path.Combine(Application.persistentDataPath, "gamedata.json");
-                
-                //ppumanager.SetRFIDConfiguration(-1);
+                sliderNumberOfTeamMember.onValueChanged.AddListener(OnTeamMemberChanged);
 
-                LoadPlayerData();
-                LoadGameData();
+            playerfilePath = Path.Combine(Application.persistentDataPath, "playerdatacoop.json");
+            //gamefilePath = Path.Combine(Application.persistentDataPath, "gamedata.json");
+            gamefilePath = Path.Combine(Application.persistentDataPath, "gamedatacoop.json");
 
-                playersNames[0].text = playerdata.player1Name;
-                playersNames[1].text = playerdata.player2Name;
-                playersNames[2].text = playerdata.player3Name;
-                playersNames[3].text = playerdata.player4Name;
-                //player1Name.text = playerdata.player1Name;
-                //player2Name.text = playerdata.player2Name;
-                currenttropperset = playerdata.currenttropperset;
+            LoadPlayerData();
+            LoadGameData();
 
-                playIntroVideo();
-            } else
+            Debug.Log("numberofteammemebers - " + playerdata.numberofteammemebers);
+            teamName.text = playerdata.teamName;
+            sliderNumberOfTeamMember.value = playerdata.numberofteammemebers;
+            }
+            else
             {
                 GameStateManager.instance.ChangeToBoardNotConnected();
             }
@@ -343,236 +372,52 @@ public class Board : BoardBase
             Debug.Log("Exit Start()");
         }
     }
-    public void pauseGame()
-    {
-        Debug.Log("Enter pauseGame()");
-        try
-        {
-            isPaused = true;
-            AudioManager.instance.PauseSFX();
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Error: " + e.Message);
-        }
-        finally
-        {
-            Debug.Log("Exit pauseGame()");
-        }
-    }
-    public void restartGame()
-    {
-        Debug.Log("Enter restartGame()");
-        try
-        {
-            AudioManager.instance.UnpauseSFX();
-            isPaused = false;
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Error: " + e.Message);
-        }
-        finally
-        {
-            Debug.Log("Exit restartGame()");
-        }
-    }
-    public void MakeTagDetected()
-    {
-        Debug.Log("Enter MakeTagDetected()");
-        try
-        {
-            AudioManager.instance.stopCountdown();
-            if(maketagdetectCoroutine != null)
-            {
-                StopCoroutine(maketagdetectCoroutine);
-                maketagdetectCoroutine = null;
-            }
-            maketagdetectCoroutine = StartCoroutine(MakeTagDetectedFlow());
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Error: " + e.Message);
-        }
-        finally
-        {
-            Debug.Log("Exit MakeTagDetected()");
-        }
-    }
-    IEnumerator MakeTagDetectedFlow()
-    {
-        Debug.Log("Enter MakeTagDetected(currenttroopers.Count,nextTiles.Count) " + currenttroopers.Count + " " + nextTiles.Count);
-
-        int trooperX = 0;
-
-        int numberoftagstosimulate = nextTiles.Count;
-        Message msg = new Message();
-        msg.bleaddress = "84:0D:8E:23:8F:A6";
-        msg.pputags = new MessageTag[numberoftagstosimulate];
-        int numberOfTagsToSend = 0;
-        foreach (Tile tile in nextTiles)
-        {
-            numberoftagstosimulate--;
-            Trooper troopertoplay = currenttroopers[trooperX];
-            MessageTag msgtag = new MessageTag();
-            msgtag.antenna = tile.antenna;
-            msgtag.id = troopertoplay.GameObjects[0].Tag.SerialNumber;
-            msg.pputags[trooperX] = msgtag;
-
-            Message msgToSend = new Message();
-            msgToSend.bleaddress = "84:0D:8E:23:8F:A6";
-
-            numberOfTagsToSend++;
-            if (orderTrooperMetter == false)
-            {
-                msgToSend.pputags = new MessageTag[numberOfTagsToSend];
-                for (int x = 0; x < numberOfTagsToSend; x++)
-                {
-                    msgToSend.pputags[x] = msg.pputags[x];
-                }
-            } else {
-                msgToSend.pputags = new MessageTag[numberOfTagsToSend];
-                msgToSend.pputags[0] = msg.pputags[trooperX];
-            }
-
-            trooperX++;
-
-            string message = JsonUtility.ToJson(msgToSend, false);
-            Debug.Log("Send tags - " + message);
-            allDetectedTags(message);
-
-            if (numberoftagstosimulate == 0)
-            {
-                break;
-            }
-            yield return new WaitForSeconds(1);
-        }
-
-        yield return null;
-        
-        Debug.Log("Exit MakeTagDetected()");
-    }
-    public void allDetectedTags(string message)
-    {
-        Debug.Log("Enter allDetectedTags() message-" + message);
-            
-        try
-        {
-            if (ingamenames == true)
-            {
-                Debug.Log("allDetectedTags - ingamenames");
-                // just detect the tropper set to play with
-                PPUData ppudata = ppumanager.getPPUData(message);
-                if (ppudata.pputags.Length > 0)
-                {
-                    Debug.Log("allDetectedTags - ingamenames - tag detected");
-                    isTagDetected.text = "Detected";
-                    currenttropperset = Troopers.instance.getTrooperSetByTagID(ppudata.pputags[0].id);
-                }
-            }
-            else
-            {
-                if (noNeedToDetectAgain == true)
-                {
-                    return;
-                }
-                if (lastDetectedMessage == null || lastDetectedMessage.CompareTo(message) != 0)
-                {
-                    lastDetectedMessage = message;
-                    PPUData ppudata = ppumanager.getPPUData(message);
-                    if (ppudata.pputags.Length > 0)
-                    {
-                        PlayTags(ppudata);
-                        TagDetectedStatus tagsDetectedStatus = calculateScore(ppudata);
-                        Debug.Log("tagsDetectedStatus-" + tagsDetectedStatus.ToString());
-                        if (tagsDetectedStatus == TagDetectedStatus.SameTag || tagsDetectedStatus == TagDetectedStatus.SameTagSameOrder)
-                        {
-                            Debug.Log("Tags are detected correctly");
-                            noNeedToDetectAgain = true;
-
-                            // Disable all antennas
-                            ppumanager.setAntennaLocation(new int[] { });
-
-                            if (playCountDownRoutine != null)
-                                StopCoroutine(playCountDownRoutine);
-
-                            currentplayer.points += currentRoundScore;
-
-                            setPointsOnTheBoard();
-
-                            txtRoundPoints.text = "+" + currentRoundScore;
-                            lock (syncTropperDetection)
-                            {
-                                if (tropperStillDetecting == true)
-                                {
-                                    tropperStillDetecting = false;
-                                    AudioManager.instance.playSuccess();
-                                    GameStateManagerMulti.instance.ChangeToWellDone();
-
-                                    unPrintDetectedTrooperOnBoard();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Error: " + e.Message);
-        }
-        finally
-        {
-            Debug.Log("Exit allDetectedTags()");
-        }
-    }
     private void setPointsOnTheBoard()
     {
         List<Player> players = playersengine.players;
-        for(int x = 0; x < players.Count; x++)
+        for (int x = 0; x < players.Count; x++)
         {
-            bannerPlayersPoints[x].text = players[x].points.ToString();
+            //bannerPlayersPoints[x].text = players[x].points.ToString();
         }
     }
     private void LoadPlayerData()
     {
-        playerdata = new PlayerData();  // Default fresh data
+        playerdata = new PlayerDataCoOp();  // Default fresh data
 
         if (File.Exists(playerfilePath))
         {
             try
             {
                 string json = File.ReadAllText(playerfilePath);
-                playerdata = JsonUtility.FromJson<PlayerData>(json);
+                playerdata = JsonUtility.FromJson<PlayerDataCoOp>(json);
 
                 // Validate loaded data (optional safety)
-                if (string.IsNullOrEmpty(playerdata.player1Name))
-                    playerdata.player1Name = "Guest 1";
-                if (string.IsNullOrEmpty(playerdata.player1Name))
-                    playerdata.player2Name = "Guest 2";
+                if (string.IsNullOrEmpty(playerdata.teamName))
+                    playerdata.teamName = "Guest Team";
             }
             catch (Exception e)
             {
                 Debug.LogWarning($"Load failed: {e.Message} - Using defaults");
             }
-        } else
+        }
+        else
         {
             Debug.Log("Can't load data - File does not exist");
         }
     }
     private void LoadGameData()
     {
-        Debug.Log("Enter LoadGameData()");
+        Debug.Log("Enter LoadCoOpGameData()");
         try
         {
-            gamedata = new GameData();
+            gamedata = new GameDataCoOp();
 
             if (File.Exists(gamefilePath))
             {
                 try
                 {
                     string json = File.ReadAllText(gamefilePath);
-                    gamedata = JsonUtility.FromJson<GameData>(json);
+                    gamedata = JsonUtility.FromJson<GameDataCoOp>(json);
                 }
                 catch (Exception e)
                 {
@@ -585,82 +430,181 @@ public class Board : BoardBase
             }
             if (string.IsNullOrEmpty(gamedata.basicWaitTime))
                 gamedata.basicWaitTime = GameEngine.basicWaitTime.ToString();
-            if (string.IsNullOrEmpty(gamedata.advancedWaitTime))
-                gamedata.advancedWaitTime = GameEngine.advancedWaitTime.ToString();
-            if (string.IsNullOrEmpty(gamedata.expertWaitTime))
-                gamedata.expertWaitTime = GameEngine.expertWaitTime.ToString();
             if (string.IsNullOrEmpty(gamedata.masterWaitTime))
                 gamedata.masterWaitTime = GameEngine.masterWaitTime.ToString();
-            if (string.IsNullOrEmpty(gamedata.eliteWaitTime))
-                gamedata.eliteWaitTime = GameEngine.eliteWaitTime.ToString();
             if (string.IsNullOrEmpty(gamedata.legendaryWaitTime))
                 gamedata.legendaryWaitTime = GameEngine.legendaryWaitTime.ToString();
 
             if (string.IsNullOrEmpty(gamedata.basicNumOfRounds))
                 gamedata.basicNumOfRounds = GameEngine.basicNumOfRounds.ToString();
-            if (string.IsNullOrEmpty(gamedata.advancedNumOfRounds))
-                gamedata.advancedNumOfRounds = GameEngine.advancedNumOfRounds.ToString();
-            if (string.IsNullOrEmpty(gamedata.expertNumOfRounds))
-                gamedata.expertNumOfRounds = GameEngine.expertNumOfRounds.ToString();
             if (string.IsNullOrEmpty(gamedata.masterNumOfRounds))
                 gamedata.masterNumOfRounds = GameEngine.masterNumOfRounds.ToString();
-            if (string.IsNullOrEmpty(gamedata.eliteNumOfRounds))
-                gamedata.eliteNumOfRounds = GameEngine.eliteNumOfRounds.ToString();
             if (string.IsNullOrEmpty(gamedata.legendaryNumOfRounds))
                 gamedata.legendaryNumOfRounds = GameEngine.legendaryNumOfRounds.ToString();
 
             if (string.IsNullOrEmpty(gamedata.basicNumOfRoundsMin))
                 gamedata.basicNumOfRoundsMin = GameEngine.basicNumOfRoundsMin.ToString();
-            if (string.IsNullOrEmpty(gamedata.advancedNumOfRoundsMin))
-                gamedata.advancedNumOfRoundsMin = GameEngine.advancedNumOfRoundsMin.ToString();
-            if (string.IsNullOrEmpty(gamedata.expertNumOfRoundsMin))
-                gamedata.expertNumOfRoundsMin = GameEngine.expertNumOfRoundsMin.ToString();
             if (string.IsNullOrEmpty(gamedata.masterNumOfRoundsMin))
                 gamedata.masterNumOfRoundsMin = GameEngine.masterNumOfRoundsMin.ToString();
-            if (string.IsNullOrEmpty(gamedata.eliteNumOfRoundsMin))
-                gamedata.eliteNumOfRoundsMin = GameEngine.eliteNumOfRoundsMin.ToString();
             if (string.IsNullOrEmpty(gamedata.legendaryNumOfRoundsMin))
                 gamedata.legendaryNumOfRoundsMin = GameEngine.legendaryNumOfRoundsMin.ToString();
 
-            if (string.IsNullOrEmpty(gamedata.numberOfPlayers))
-                gamedata.numberOfPlayers = GameEngine.numberOfPlayers.ToString();
-
-            if (string.IsNullOrEmpty(gamedata.eliteTimeToDisappear))
-                gamedata.eliteTimeToDisappear = GameEngine.eliteTimeToDisappear.ToString();
             if (string.IsNullOrEmpty(gamedata.legendaryTimeToDisappear))
                 gamedata.legendaryTimeToDisappear = GameEngine.legendaryTimeToDisappear.ToString();
 
-            Debug.Log("gamedata.basicWaitTime.ToString()-" + gamedata.basicWaitTime.ToString());
-            Debug.Log("gamedata.basicNumOfRounds.ToString()-" + gamedata.basicNumOfRounds.ToString());
             basicWaitTime.text = gamedata.basicWaitTime.ToString();
-            advancedWaitTime.text = gamedata.advancedWaitTime.ToString();
-            expertWaitTime.text = gamedata.expertWaitTime.ToString();
             masterWaitTime.text = gamedata.masterWaitTime.ToString();
-            eliteWaitTime.text = gamedata.eliteWaitTime.ToString();
             legendaryWaitTime.text = gamedata.legendaryWaitTime.ToString();
 
             basicNumOfRounds.text = gamedata.basicNumOfRounds.ToString();
-            advancedNumOfRounds.text = gamedata.advancedNumOfRounds.ToString();
-            expertNumOfRounds.text = gamedata.expertNumOfRounds.ToString();
             masterNumOfRounds.text = gamedata.masterNumOfRounds.ToString();
-            eliteNumOfRounds.text = gamedata.eliteNumOfRounds.ToString();
             legendaryNumOfRounds.text = gamedata.legendaryNumOfRounds.ToString();
 
             basicNumOfRoundsMin.text = gamedata.basicNumOfRoundsMin.ToString();
-            advancedNumOfRoundsMin.text = gamedata.advancedNumOfRoundsMin.ToString();
-            expertNumOfRoundsMin.text = gamedata.expertNumOfRoundsMin.ToString();
             masterNumOfRoundsMin.text = gamedata.masterNumOfRoundsMin.ToString();
-            eliteNumOfRoundsMin.text = gamedata.eliteNumOfRoundsMin.ToString();
             legendaryNumOfRoundsMin.text = gamedata.legendaryNumOfRoundsMin.ToString();
 
-            numberOfPlayers.text = gamedata.numberOfPlayers.ToString();
-
-            eliteTimeToDisappear.text = gamedata.eliteTimeToDisappear.ToString();
             legendaryTimeToDisappear.text = gamedata.legendaryTimeToDisappear.ToString();
         }
         finally
         {
-            Debug.Log("Exit LoadGameData()");
+            Debug.Log("Exit LoadCoOpGameData()");
+        }
+    }
+    public bool SaveSettings()
+    {
+        Debug.Log("Enter SaveCoOpSettings()");
+        try
+        {
+            if (validateInputs() == true)
+            {
+                gamedata.basicWaitTime = basicWaitTime.text;
+                gamedata.masterWaitTime = masterWaitTime.text;
+                gamedata.legendaryWaitTime = legendaryWaitTime.text;
+
+                gamedata.basicNumOfRounds = basicNumOfRounds.text;
+                gamedata.masterNumOfRounds = masterNumOfRounds.text;
+                gamedata.legendaryNumOfRounds = legendaryNumOfRounds.text;
+
+                gamedata.basicNumOfRoundsMin = basicNumOfRoundsMin.text;
+                gamedata.masterNumOfRoundsMin = masterNumOfRoundsMin.text;
+                gamedata.legendaryNumOfRoundsMin = legendaryNumOfRoundsMin.text;
+
+                gamedata.legendaryTimeToDisappear = legendaryTimeToDisappear.text;
+
+                string json = JsonUtility.ToJson(gamedata, true);
+                File.WriteAllText(gamefilePath, json);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error: " + e.Message);
+            return false;
+        }
+        finally
+        {
+            Debug.Log("Exit SaveCoOpSettings()");
+        }
+    }
+    private bool validateInputs()
+    {
+        bool validinputs = true;
+        Debug.Log("Enter validateCoOpInputs()");
+        try
+        {
+            if (Convert.ToInt32(legendaryTimeToDisappear.text) >= Convert.ToInt32(legendaryWaitTime.text))
+            {
+                validinputs = false;
+            }
+            if (Convert.ToInt32(basicNumOfRoundsMin.text) > Convert.ToInt32(basicNumOfRounds.text))
+            {
+                validinputs = false;
+            }
+            if (Convert.ToInt32(masterNumOfRoundsMin.text) > Convert.ToInt32(masterNumOfRounds.text))
+            {
+                validinputs = false;
+            }
+            if (Convert.ToInt32(legendaryNumOfRoundsMin.text) > Convert.ToInt32(legendaryNumOfRounds.text))
+            {
+                validinputs = false;
+            }
+            return validinputs;
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error: " + e.Message);
+            return false;
+        }
+        finally
+        {
+            Debug.Log("Exit validateCoOpInputs()");
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+    public bool SetTeamMembersNames()
+    {
+        Debug.Log("Enter SetTeamMembersNames() teamName.text-" + teamName.text);
+        try
+        {
+            if (emulator == true)
+            {
+                currenttropperset = 1;
+            }
+
+            bannerTeamName.text = teamName.text;
+            /*int numberOfPlayers = Convert.ToInt32(gamedata.numberOfPlayers);
+            for (int x = 0; x < numberOfPlayers; x++)
+            {
+                bannerPlayersNames[x].text = playersNames[x].text;
+                bannerPlayersNames[x].gameObject.SetActive(true);
+                bannerPlayersPoints[x].gameObject.SetActive(true);
+                if (competitiveMode == false)
+                {
+                    Harts[x].gameObject.SetActive(true);
+                }
+                Stars[x].gameObject.SetActive(true);
+            }
+
+            demoscreenPlayer1Name.text = playersNames[0].text;
+            demoscreenPlayer2Name.text = playersNames[1].text;
+
+            playerdata.player1Name = playersNames[0].text;
+            playerdata.player2Name = playersNames[1].text;
+            playerdata.player3Name = playersNames[2].text;
+            playerdata.player4Name = playersNames[3].text;
+            */
+            playerdata.numberofteammemebers = numberofteammember;
+            playerdata.teamName = teamName.text;
+            playerdata.currenttropperset = currenttropperset;
+            ingamenames = false;
+
+            Debug.Log("playerdata.numberofteammemebers - " + numberofteammember);
+
+            SavePlayerData();
+            Debug.Log("currenttropperset - " + currenttropperset);
+            if (currenttropperset == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        finally
+        {
+            Debug.Log("Exit SetTeamMembersNames()");
         }
     }
     public void SavePlayerData()
@@ -680,241 +624,45 @@ public class Board : BoardBase
             Debug.Log("Exit SavePlayerData()");
         }
     }
-    public bool SaveSettings()
-    {
-        Debug.Log("Enter SaveSettings()");
-        try
-        {
-            if(validateInputs() == true)
-            {
-                gamedata.basicWaitTime = basicWaitTime.text;
-                gamedata.advancedWaitTime = advancedWaitTime.text;
-                gamedata.expertWaitTime = expertWaitTime.text;
-                gamedata.masterWaitTime = masterWaitTime.text;
-                gamedata.eliteWaitTime = eliteWaitTime.text;
-                gamedata.legendaryWaitTime = legendaryWaitTime.text;
-
-                gamedata.basicNumOfRounds = basicNumOfRounds.text;
-                gamedata.advancedNumOfRounds = advancedNumOfRounds.text;
-                gamedata.expertNumOfRounds = expertNumOfRounds.text;
-                gamedata.masterNumOfRounds = masterNumOfRounds.text;
-                gamedata.eliteNumOfRounds = eliteNumOfRounds.text;
-                gamedata.legendaryNumOfRounds = legendaryNumOfRounds.text;
-
-                gamedata.basicNumOfRoundsMin = basicNumOfRoundsMin.text;
-                gamedata.advancedNumOfRoundsMin = advancedNumOfRoundsMin.text;
-                gamedata.expertNumOfRoundsMin = expertNumOfRoundsMin.text;
-                gamedata.masterNumOfRoundsMin = masterNumOfRoundsMin.text;
-                gamedata.eliteNumOfRoundsMin = eliteNumOfRoundsMin.text;
-                gamedata.legendaryNumOfRoundsMin = legendaryNumOfRoundsMin.text;
-
-                gamedata.numberOfPlayers = numberOfPlayers.text;
-
-                gamedata.eliteTimeToDisappear = eliteTimeToDisappear.text;
-                gamedata.legendaryTimeToDisappear = legendaryTimeToDisappear.text;
-
-                string json = JsonUtility.ToJson(gamedata, true);  // Pretty print for readability
-                File.WriteAllText(gamefilePath, json);
-
-                return true;
-            } else
-            {
-                return false;
-            }
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Error: " + e.Message);
-            return false;
-        }
-        finally
-        {
-            Debug.Log("Exit SaveSettings()");
-        }
-    }
-    private bool validateInputs()
-    {
-        bool validinputs = true;
-        Debug.Log("Enter validateInputs()");
-        try
-        {
-            Debug.Log("eliteTimeToDisappear.text-" + eliteTimeToDisappear.text + " legendaryTimeToDisappear.text-" + legendaryTimeToDisappear.text);
-            if (Convert.ToInt32(eliteTimeToDisappear.text) >= Convert.ToInt32(eliteWaitTime.text) || Convert.ToInt32(legendaryTimeToDisappear.text) >= Convert.ToInt32(legendaryWaitTime.text))
-            {
-                validinputs = false;
-            }
-            if (Convert.ToInt32(basicNumOfRoundsMin.text) > Convert.ToInt32(basicNumOfRounds.text))
-            {
-                validinputs = false;
-            }
-            if (Convert.ToInt32(advancedNumOfRoundsMin.text) > Convert.ToInt32(advancedNumOfRounds.text))
-            {
-                validinputs = false;
-            }
-            if (Convert.ToInt32(expertNumOfRoundsMin.text) > Convert.ToInt32(expertNumOfRounds.text))
-            {
-                validinputs = false;
-            }
-            if (Convert.ToInt32(masterNumOfRoundsMin.text) > Convert.ToInt32(masterNumOfRounds.text))
-            {
-                validinputs = false;
-            }
-            if (Convert.ToInt32(eliteNumOfRoundsMin.text) > Convert.ToInt32(eliteNumOfRounds.text))
-            {
-                validinputs = false;
-            }
-            if (Convert.ToInt32(legendaryNumOfRoundsMin.text) > Convert.ToInt32(legendaryNumOfRounds.text))
-            {
-                validinputs = false;
-            }
-            return validinputs;
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Error: " + e.Message);
-            return false;
-        }
-        finally
-        {
-            Debug.Log("Exit validateInputs()");
-        }
-    }
-    private void playIntroVideo()
-    {
-        Debug.Log("Enter playIntroVideo()");
-        try
-        {
-            // Subscribe to the video end event
-            videoPlayer.loopPointReached += OnVideoFinished;
-
-            // Play the video (optional, if Play on Awake is unchecked)
-            videoPlayer.Play();
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Error: " + e.Message);
-        }
-        finally
-        {
-            Debug.Log("Exit playIntroVideo()");
-        }
-    }
-    void OnVideoFinished(VideoPlayer vp)
-    {
-        Debug.Log("Enter OnVideoFinished()");
-        try
-        {
-            videoPlayer.enabled = false;
-            ingamenames = true;
-            GameStateManager.instance.ChangeToSelectMode();
-
-            ppumanager.setAntennaLocation(new int[] { 13 });
-
-            // Start thread to get boardinfo
-            StartCoroutine(GetBoardInfoRoutine());
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Error: " + e.Message);
-        }
-        finally
-        {
-            Debug.Log("Exit OnVideoFinished()");
-        }
-    }
-    private IEnumerator GetBoardInfoRoutine()
-    {
-        while (true)
-        {
-            GetBoardInfo();
-            yield return new WaitForSeconds(10f);
-        }
-    }
-    private void GetBoardInfo()
-    {
-        ppumanager.getPPUInfo();
-    }
-    public void boardInfo(string message)
-    {
-        Debug.Log("Enter boardInfo() message-" + message);
-        try
-        {
-            BoardInfo boardInfo = JsonUtility.FromJson<BoardInfo>(message);
-            
-            BoardStatus boardStatus = JsonUtility.FromJson<BoardStatus>(boardInfo.boardinfo);
-            
-            string batInfo = boardStatus.batteryinfo;
-            
-            Debug.Log("batInfo-" + batInfo);
-
-            txtBattery.text = batInfo + "%";
-            /*if (wifiinfo == 1)
-            {
-                txtWiFiStatus.text = "WiFi connected";
-            }
-            else
-            {
-                txtWiFiStatus.text = "WiFi is not avaliable";
-            }
-            if (rfidstatus == 0)
-            {
-                txtRFIDStatus.text = "RFID operational: functioning perfectly";
-            }
-            else
-            {
-                txtRFIDStatus.text = "RFID failure: not operational";
-            }
-            if (boardInfo.bleaddress == null)
-            {
-                txtBLEStatus.text = "BLE is not ready yet";
-            }
-            else
-            {
-                txtBLEStatus.text = boardInfo.bleaddress;
-            }*/
-            //txtFirmwareVersion.text = boardStatus.firmwareversion;
-            //txtHardwareVersion.text = boardStatus.hardwareversion;
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Error: " + e.Message);
-        }
-        finally
-        {
-            Debug.Log("Exit boardInfo()");
-        }
-    }
-    
     public void StartGameDificulty(GameDificulty gameDificulty)
     {
         Debug.Log("Enter StartGameDificulty()");
         try
         {
-            gameengine = new GameEngine(gameDificulty, gamedata);
+            Debug.Log("1");
+            gameengine = new GameEngineCoOp(gameDificulty, gamedata);
+            Debug.Log("11");
             if (playersengine == null)
             {
+                Debug.Log("3");
                 playersengine = new PlayersEngine();
-                int numberOfPlayers = Convert.ToInt32(gamedata.numberOfPlayers);
-                for (int x = 0; x < numberOfPlayers; x++)
-                {
-                    playersengine.addNewPlayer(playersNames[x].text);
-                }
-            } else
+                Debug.Log("4-" + playerdata.numberofteammemebers);
+                int numberOfPlayers = Convert.ToInt32(playerdata.numberofteammemebers);
+                Debug.Log("5");
+                //for (int x = 0; x < numberOfPlayers; x++)
+                //{
+                    playersengine.addNewPlayer(teamName.text);
+                //}
+            }
+            else
             {
                 playersengine.Reset();
             }
+            Debug.Log("2");
             startroundTotalTime = gameengine.timeToPlay;
             startroundCountdownSteps = gameengine.timeToPlay;
+            Debug.Log("3");
 
-            this.gameDificulty = gameDificulty;
-            if(this.gameDificulty == GameDificulty.Basic || this.gameDificulty == GameDificulty.Advanced)
+            gameDificulty = gameDificulty;
+            if (this.gameDificulty == GameDificulty.Basic)
             {
                 getTrooperRandomally = false;
-            } else
+            }
+            else
             {
                 getTrooperRandomally = true;
             }
-            if (this.gameDificulty == GameDificulty.Elite || this.gameDificulty == GameDificulty.Legendary)
+            if (this.gameDificulty == GameDificulty.Legendary)
             {
                 trooperDisappear = true;
                 trooperObjectToDisapear = new List<object>();
@@ -923,7 +671,7 @@ public class Board : BoardBase
             {
                 trooperDisappear = false;
             }
-            if (this.gameDificulty == GameDificulty.Advanced || this.gameDificulty == GameDificulty.Master || this.gameDificulty == GameDificulty.Legendary)
+            if (this.gameDificulty == GameDificulty.Master || this.gameDificulty == GameDificulty.Legendary)
             {
                 orderTrooperMetter = true;
                 detectTagsOrdered = new Dictionary<string, string>();
@@ -1018,12 +766,12 @@ public class Board : BoardBase
      ***************************/
 
     /****************************
-     * 
-     * 
-     * Start Get Ready
-     * 
-     * 
-     ***************************/
+    * 
+    * 
+    * Start Get Ready
+    * 
+    * 
+    ***************************/
     public void StartGetReadyNow(bool BeginingOfGame)
     {
         Debug.Log("Enter StartGetReadyNow()");
@@ -1039,7 +787,7 @@ public class Board : BoardBase
             trooperObjectToDisapear.Clear();
         }
 
-        boardSetup = new BoardSetupMulti();
+        boardSetup = new BoardSetupCoOp();
 
         StartCoroutine(StartGetReadyNowFlow(BeginingOfGame));
 
@@ -1075,7 +823,7 @@ public class Board : BoardBase
 
         currenttroopers = Troopers.instance.getNextTroppers(currentround.NumberOfTroopers, getTrooperRandomally);
 
-        if (this.gameDificulty == GameDificulty.Basic || this.gameDificulty == GameDificulty.Advanced)
+        if (this.gameDificulty == GameDificulty.Basic)
         {
             // Get the next new trooper. Only in Basic or Advanced
             Trooper troopertoplay = currenttroopers[currenttroopers.Count - 1];
@@ -1087,14 +835,15 @@ public class Board : BoardBase
             txtRound.text = currentround.Name;
             txtTrooperNumber.text = txtNumbers[currentround.NumberOfTroopers];
             txtTrooper.text = txtTrooperString[currentround.NumberOfTroopers];
-            txtPlayerName.text = currentplayer.Name;
+            txtPlayerName.text = "ttt"; // currentplayer.Name;
             yield return StartCoroutine(StartGetReadyCountdown());
-            GameStateManagerMulti.instance.ChangeToPlay();
-        } else
+            GameStateManagerCoOp.instance.ChangeToPlay();
+        }
+        else
         {
             string finishlevel = string.Format("Finish Level {0}, Get Ready For The Next Level - {1}", gameengine.currentGameDificultyName, gameengine.nextGameDificultyName);
             finishLevelMessage.text = finishlevel;
-            GameStateManagerMulti.instance.ChangeToNextDifficulty();
+            GameStateManagerCoOp.instance.ChangeToNextDifficulty();
         }
         Debug.Log("Exit StartGetReadyNowFlow()");
     }
@@ -1132,14 +881,14 @@ public class Board : BoardBase
                 yield return null;
             }
             yield return new WaitForSeconds(stepTime);
-            
+
             countdownCounter--;
             countdownText.text = countdownCounter.ToString();
             if (countdownCounter == getreadyLastSecond)
             {
                 countdownText.color = new Color(1f, 0f, 0f);
             }
-            
+
             fill -= step;
             ringMaterial.SetFloat("_Fill", fill);
         }
@@ -1155,7 +904,6 @@ public class Board : BoardBase
      * 
      * 
      ***************************/
-
     /****************************
      * 
      * 
@@ -1187,7 +935,7 @@ public class Board : BoardBase
 
         yield return StartCoroutine(StartPlayCountdown());
 
-        Debug.Log("Exit StartRoundFlow()");  
+        Debug.Log("Exit StartRoundFlow()");
     }
     IEnumerator StartPlayCountdown()
     {
@@ -1225,7 +973,7 @@ public class Board : BoardBase
                 yield return null;
             }
             yield return new WaitForSeconds(stepTime);
-            
+
             countdownCounter--;
             countdownText.text = countdownCounter.ToString();
             if (countdownCounter == startroundLastSecond)
@@ -1259,7 +1007,7 @@ public class Board : BoardBase
                 TagDetectedStatus tagsDetectedStatus = calculateScore(null);
                 currentplayer.points += currentRoundScore;
                 txtRoundPartialPoints.text = "+" + currentRoundScore;
-                
+
                 setPointsOnTheBoard();
 
                 GameStateManagerMulti.instance.ChangeToFailRound();
@@ -1267,7 +1015,7 @@ public class Board : BoardBase
                 unPrintDetectedTrooperOnBoard();
             }
         }
-        
+
         Debug.Log("Exit PlayCountdown()");
     }
     /****************************
@@ -1277,277 +1025,6 @@ public class Board : BoardBase
      * 
      * 
      ***************************/
-
-    /****************************
-     * 
-     * 
-     * Well Done
-     * 
-     * 
-     ***************************/
-    public void StartWellDone()
-    {
-        Debug.Log("Enter StartWellDone()");
-        
-        StartCoroutine(StartWellDoneFlow());
-
-        Debug.Log("Exit StartWellDone()");
-    }
-    IEnumerator StartWellDoneFlow()
-    {
-        Debug.Log("Enter StartWellDoneFlow()");
-
-        
-        yield return StartCoroutine(StartWellDoneCountdown());
-
-        Debug.Log("Exit StartWellDoneFlow()");
-
-
-
-    }
-    IEnumerator StartWellDoneCountdown()
-    {
-        if (welldoneCountDownRoutine != null)
-            StopCoroutine(welldoneCountDownRoutine);
-
-        welldoneCountDownRoutine = StartCoroutine(WellDoneCountdown());
-
-        yield return welldoneCountDownRoutine;
-    }
-    IEnumerator WellDoneCountdown()
-    {
-        Debug.Log("Enter WellDoneCountdown()");
-
-        float fill = 1f;
-        ringMaterial.SetFloat("_Fill", fill);
-
-        float stepTime = welldoneTotalTime / welldoneCountdownSteps;
-        float step = 1f / welldoneCountdownSteps;
-
-        // convert seconds → fill threshold
-        float warningFill = welldoneLastSecond / welldoneTotalTime;
-        ringMaterial.SetFloat("_WarningFill", warningFill);
-        countdownText.color = new Color(0f, 1f, 0f);
-
-        for (int i = 0; i < welldoneCountdownSteps; i++)
-        {
-            while (isPaused)
-            {
-                yield return null;
-            }
-            yield return new WaitForSeconds(stepTime);
-            
-            fill -= step;
-            ringMaterial.SetFloat("_Fill", fill);
-        }
-
-        ringMaterial.SetFloat("_Fill", 0f);
-        if (currentplayer.lastPlayer == true)
-        {
-            List<Player> winnerplayers = playersengine.GetWinnerPlayers();
-            string playersnames = null;
-
-            txtBonusPoints.text = "+" + currentround.Bonuspoints;
-            foreach (Player winnerplayer in winnerplayers)
-            {
-                if(playersnames != null)
-                {
-                    playersnames += ", " + winnerplayer.Name;
-                }
-                else
-                {
-                    playersnames = winnerplayer.Name;
-                }
-                winnerplayer.points += currentround.Bonuspoints;
-            }
-            if (winnerplayers.Count == 2)
-            {
-                txtWinsRoundNumber.text = "Round " + currentround.Name + " is a tie!";
-            } else
-            {
-                txtWinsRoundNumber.text = playersnames + " wins " + currentround.Name;
-            }
-            // Set the points on the board
-            setPointsOnTheBoard();
-            GameStateManagerMulti.instance.ChangeToBonus();
-        } else {
-            Turns[currentplayer.playerIndex].gameObject.SetActive(false);
-            Turns[currentplayer.playerIndex + 1].gameObject.SetActive(true);
-            GameStateManagerMulti.instance.ChangeToGatReady(false);
-        }
-
-        Debug.Log("Exit WellDoneCountdown()");
-    }
-    /****************************
-    * 
-    * 
-    * Well Done
-    * 
-    * 
-    ***************************/
-
-    /****************************
-     * 
-     * 
-     * Fail Round
-     * 
-     * 
-     ***************************/
-    public void StartFailRound()
-    {
-        Debug.Log("Enter StartFailRound()");
-
-        StartCoroutine(StartFailRoundFlow());
-
-        Debug.Log("Exit StartFailRound()");
-    }
-    IEnumerator StartFailRoundFlow()
-    {
-        Debug.Log("Enter StartFailRoundFlow()");
-
-
-        yield return StartCoroutine(StartFailRoundCountdown());
-
-        Debug.Log("Exit StartFailRoundFlow()");
-
-
-
-    }
-    IEnumerator StartFailRoundCountdown()
-    {
-        if (failRoundCountDownRoutine != null)
-            StopCoroutine(failRoundCountDownRoutine);
-
-        countdownText.text = countdownCounter.ToString();
-
-        failRoundCountDownRoutine = StartCoroutine(FailRoundCountdown());
-
-        yield return failRoundCountDownRoutine;
-    }
-    IEnumerator FailRoundCountdown()
-    {
-        Debug.Log("Enter FailRoundCountdown()");
-
-        float fill = 1f;
-        ringMaterial.SetFloat("_Fill", fill);
-
-        float stepTime = failRoundTotalTime / failRoundCountdownSteps;
-        float step = 1f / failRoundCountdownSteps;
-
-        // convert seconds → fill threshold
-        float warningFill = failRoundLastSecond / failRoundTotalTime;
-        ringMaterial.SetFloat("_WarningFill", warningFill);
-        countdownText.color = new Color(0f, 1f, 0f);
-
-        for (int i = 0; i < failRoundCountdownSteps; i++)
-        {
-            while (isPaused)
-            {
-                yield return null;
-            }
-            yield return new WaitForSeconds(stepTime);
-
-            fill -= step;
-            ringMaterial.SetFloat("_Fill", fill);
-        }
-
-        ringMaterial.SetFloat("_Fill", 0f);
-        if (currentplayer.lastPlayer == true)
-        {
-            // Set the points on the board
-            setPointsOnTheBoard();
-            GameStateManagerMulti.instance.ChangeToBonus();
-        }
-        else
-        {
-            Turns[currentplayer.playerIndex].gameObject.SetActive(false);
-            Turns[currentplayer.playerIndex + 1].gameObject.SetActive(true);
-            GameStateManagerMulti.instance.ChangeToGatReady(false);
-        }
-        Debug.Log("Exit FailRoundCountdown()");
-    }
-    /****************************
-    * 
-    * 
-    * Fail Round
-    * 
-    * 
-    ***************************/
-
-    /****************************
-    * 
-    * 
-    * Bonus
-    * 
-    * 
-    ***************************/
-    public void StartBonus()
-    {
-        Debug.Log("Enter StartBonus()");
-        StartCoroutine(StartBonusFlow());
-        Debug.Log("Exit StartBonus()");
-    }
-    IEnumerator StartBonusFlow()
-    {
-        Debug.Log("Enter StartBonusFlow()");
-
-
-        yield return StartCoroutine(StartBonusCountdown());
-
-        Debug.Log("Exit StartBonusFlow()");
-
-
-
-    }
-    IEnumerator StartBonusCountdown()
-    {
-        if (getbonusCountDownRoutine != null)
-            StopCoroutine(getbonusCountDownRoutine);
-
-        getbonusCountDownRoutine = StartCoroutine(BonusCountdown());
-
-        yield return getbonusCountDownRoutine;
-    }
-    IEnumerator BonusCountdown()
-    {
-        Debug.Log("Enter BonusCountdown()");
-
-        float fill = 1f;
-        ringMaterial.SetFloat("_Fill", fill);
-
-        float stepTime = bonusTotalTime / bonusCountdownSteps;
-        float step = 1f / bonusCountdownSteps;
-
-        // convert seconds → fill threshold
-        float warningFill = bonusLastSecond / bonusTotalTime;
-        ringMaterial.SetFloat("_WarningFill", warningFill);
-        countdownText.color = new Color(0f, 1f, 0f);
-
-        for (int i = 0; i < bonusCountdownSteps; i++)
-        {
-            while (isPaused)
-            {
-                yield return null;
-            }
-            yield return new WaitForSeconds(stepTime);
-            
-            fill -= step;
-            ringMaterial.SetFloat("_Fill", fill);
-        }
-
-        ringMaterial.SetFloat("_Fill", 0f);
-        Turns[0].gameObject.SetActive(true);
-        Turns[Convert.ToInt32(gamedata.numberOfPlayers) - 1].gameObject.SetActive(false);
-        GameStateManagerMulti.instance.ChangeToGatReady(false);
-        Debug.Log("Exit BonusCountdown()");
-    }
-    /****************************
-    * 
-    * 
-    * Bonus
-    * 
-    * 
-    ***************************/
     /****************************
     * 
     * 
@@ -1583,7 +1060,7 @@ public class Board : BoardBase
     IEnumerator DisapearTropperCountdown()
     {
         Debug.Log("Enter DisapearTropperCountdown()");
-        
+
         for (int i = 0; i < gameengine.currentTimeToDisappear; i++)
         {
             while (isPaused)
@@ -1593,12 +1070,13 @@ public class Board : BoardBase
             yield return new WaitForSeconds(1);
         }
 
-        foreach(object trooperObjectToDisapear in trooperObjectToDisapear)
+        foreach (object trooperObjectToDisapear in trooperObjectToDisapear)
         {
-            if(trooperObjectToDisapear is GameObject)
+            if (trooperObjectToDisapear is GameObject)
             {
                 ((GameObject)trooperObjectToDisapear).SetActive(false);
-            } else
+            }
+            else
             {
                 ((TextMeshProUGUI)trooperObjectToDisapear).gameObject.SetActive(false);
             }
@@ -1614,64 +1092,7 @@ public class Board : BoardBase
     * 
     ***************************/
 
-    public bool SetPlayerNames()
-    {
-        Debug.Log("Enter SetPlayerNames()");
-        try
-        {
-            if (emulator == true)
-            {
-                currenttropperset = 1;
-            }
-            for (int x = 0; x < GameEngine.maxNumberOfPlayers; x++)
-            {
-                bannerPlayersNames[x].gameObject.SetActive(false);
-                bannerPlayersPoints[x].gameObject.SetActive(false);
-                Harts[x].gameObject.SetActive(false);
-                Stars[x].gameObject.SetActive(false);
-            }
 
-            int numberOfPlayers = Convert.ToInt32(gamedata.numberOfPlayers);
-            for (int x = 0; x < numberOfPlayers; x++)
-            {
-                bannerPlayersNames[x].text = playersNames[x].text;
-                bannerPlayersNames[x].gameObject.SetActive(true);
-                bannerPlayersPoints[x].gameObject.SetActive(true);
-                if (competitiveMode == false)
-                {
-                    Harts[x].gameObject.SetActive(true);
-                }
-                Stars[x].gameObject.SetActive(true);
-            }
-            
-            demoscreenPlayer1Name.text = playersNames[0].text;
-            demoscreenPlayer2Name.text = playersNames[1].text;
-
-            playerdata.player1Name = playersNames[0].text;
-            playerdata.player2Name = playersNames[1].text;
-            playerdata.player3Name = playersNames[2].text;
-            playerdata.player4Name = playersNames[3].text;
-
-            playerdata.currenttropperset = currenttropperset;
-            ingamenames = false;
-
-            SavePlayerData();
-            Debug.Log("currenttropperset - " + currenttropperset);
-            if (currenttropperset == 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-        finally
-        {
-            Debug.Log("Exit SetPlayerNames()");
-        }
-    }
-    
     private void PlayCurrentMove(List<Trooper> troopers)
     {
         Debug.Log("Enter PlayCurrentMove()");
@@ -1693,7 +1114,7 @@ public class Board : BoardBase
 
                 // Check that troopers selected now on antenna doesnt match the previouse layout
                 continueloop = troppermanagerPreviouseUI.checkSameLayout(troppermanagerUI);
-                if(continueloop == true)
+                if (continueloop == true)
                 {
                     Debug.Log("---------------------------- LOOPING TO FIND NEW ANTENNA ---------------------------------------");
                 }
@@ -1740,7 +1161,7 @@ public class Board : BoardBase
                     if (detectTagsOrdered.ContainsKey(pputag.id) == false)
                     {
                         if (tagsDetectedCorrectly == TagDetectedStatus.SameTagSameOrder)
-                        {   
+                        {
                             detectTagsOrdered.Add(pputag.id, pputag.id);
                         }
                     }
@@ -1797,16 +1218,16 @@ public class Board : BoardBase
                     }
                     else
                     {*/
-                        Dictionary<int, TrooperSetup> tropperssetupPPU = troppermanagerPPU.tropperssetup;
-                        Debug.Log("tropperssetupPPU.Count-" + tropperssetupPPU.Count.ToString() + "  tropperssetupUI.Count-" + tropperssetupUI.Count.ToString());
-                        if (tropperssetupPPU.Count == tropperssetupUI.Count)
-                        {
-                            tagsDetectedCorrectly = TagDetectedStatus.SameTag;
-                        }
-                        else
-                        {
-                            tagsDetectedCorrectly = TagDetectedStatus.DifferentTag;
-                        }
+                    Dictionary<int, TrooperSetup> tropperssetupPPU = troppermanagerPPU.tropperssetup;
+                    Debug.Log("tropperssetupPPU.Count-" + tropperssetupPPU.Count.ToString() + "  tropperssetupUI.Count-" + tropperssetupUI.Count.ToString());
+                    if (tropperssetupPPU.Count == tropperssetupUI.Count)
+                    {
+                        tagsDetectedCorrectly = TagDetectedStatus.SameTag;
+                    }
+                    else
+                    {
+                        tagsDetectedCorrectly = TagDetectedStatus.DifferentTag;
+                    }
                     //}
                 }
             }
@@ -1822,6 +1243,7 @@ public class Board : BoardBase
             Debug.Log("Exit calculateScore()");
         }
     }
+
     private TagDetectedStatus tagDetectedCorrectly(PPUTag pputag)
     {
         Debug.Log("Enter tagDetectedCorrectly()");
@@ -1860,7 +1282,8 @@ public class Board : BoardBase
                         ppumanager.setAntennaLocation(new int[] { currentAntennaLocations[orderTrooperMetterNextAntenna] });
                         //}
                         orderTrooperMetterNextAntenna++;
-                    } else
+                    }
+                    else
                     {
                         // Turn off all antennas
                         Debug.Log("Turn off all antennas");
@@ -1869,7 +1292,7 @@ public class Board : BoardBase
                 }
             }
             Debug.Log("tagsDetectedCorrectly - " + tagsDetectedCorrectly.ToString());
-            
+
             return tagsDetectedCorrectly;
         }
         catch (System.Exception e)
@@ -1917,11 +1340,12 @@ public class Board : BoardBase
                     orderText = CreateUITextAt(anchoredPosition, x.ToString(), 168f, new Color(255, 255, 0));
                     troopertoplay.orderText = orderText;
                 }
-                if(trooperDisappear == true)
+                if (trooperDisappear == true)
                 {
-                    if (orderText != null) {
+                    if (orderText != null)
+                    {
                         trooperObjectToDisapear.Add(orderText);
-                     }
+                    }
                     trooperObjectToDisapear.Add(trooperObjectToPrint);
                 }
             }
@@ -1935,7 +1359,8 @@ public class Board : BoardBase
             if (orderTrooperMetter == false)
             {
                 ppumanager.setAntennaLocation(currentAntennaLocations);
-            } else
+            }
+            else
             {
                 orderTrooperMetterNextAntenna = 0;
                 Debug.Log("Turn on antenna-" + currentAntennaLocations[0].ToString());
@@ -1947,7 +1372,8 @@ public class Board : BoardBase
         {
             Debug.LogError("Error: " + e.Message);
         }
-        finally {
+        finally
+        {
             Debug.Log("Exit printTrooperOnBoard()");
         }
     }
@@ -1959,7 +1385,7 @@ public class Board : BoardBase
             Dictionary<int, TrooperSetup> tropperssetupUI = troppermanagerUI.tropperssetup;
             Dictionary<int, TrooperSetup> tropperssetupPPU = troppermanagerPPU.tropperssetup;
             Debug.Log("tropperssetupPPU.Keys.Count-" + tropperssetupPPU.Keys.Count.ToString());
-            
+
             foreach (int antenna in tropperssetupPPU.Keys)
             {
                 Debug.Log("------Detected trooper on antenna - " + antenna);
@@ -2001,7 +1427,8 @@ public class Board : BoardBase
                     Tile tile = troppersetup.tile;
                     troopertoplay.GameObjects[troppersetup.side].GameImage.gameObject.SetActive(false);
                     troopertoplay.GameObjects[troppersetup.side].GameImageTransparent.gameObject.SetActive(false);
-                    if(troopertoplay.orderText != null) {
+                    if (troopertoplay.orderText != null)
+                    {
                         troopertoplay.orderText.gameObject.SetActive(false);
                     }
                 }
@@ -2045,4 +1472,5 @@ public class Board : BoardBase
 
         return tmp;
     }
+
 }
