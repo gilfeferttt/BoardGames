@@ -74,7 +74,8 @@ public class GameStateManagerCoOp : MonoBehaviour
         Debug.Log("Enter ChangeToSelectMode()");
         try
         {
-            Troopers.instance.setTroppersScale(BoardBase.GameMode.CoOpMode);
+            Troopers.instance.setTroppersScale(BoardManager.GameMode.CoOpMode);
+            BoardManager.instance.SetGameMode(BoardManager.GameMode.CoOpMode);
             GameStateManager.instance.SelectModeUI.SetActive(false);
             ChangeToGetNames();
         }
@@ -105,23 +106,6 @@ public class GameStateManagerCoOp : MonoBehaviour
         }
     }
     
-    public void ChangeToStartGame()
-    {
-        Debug.Log("Enter ChangeToStartGame()");
-        try
-        {
-            Board.instance.SetGameMode(Board.GameMode.CoOpMode);
-            ChangeToDemoScreen();
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Error: " + e.Message);
-        }
-        finally
-        {
-            Debug.Log("Exit ChangeToStartGame()");
-        }
-    }
     public void ChangeToGetDificulty()
     {
         Debug.Log("Enter ChangeToGetDificulty()");
@@ -408,7 +392,7 @@ public class GameStateManagerCoOp : MonoBehaviour
             GameStateManager.instance.FailRoundUI.SetActive(true);
 
 
-            Board.instance.StartFailRound();
+            BoardCoOp.instance.StartFailRound();
         }
         catch (System.Exception e)
         {
@@ -432,7 +416,7 @@ public class GameStateManagerCoOp : MonoBehaviour
             GameStateManager.instance.WellDoneUI.SetActive(true);
 
 
-            Board.instance.StartWellDone();
+            BoardCoOp.instance.StartWellDone();
         }
         catch (System.Exception e)
         {
@@ -452,7 +436,7 @@ public class GameStateManagerCoOp : MonoBehaviour
             GameStateManager.instance.FailRoundUI.SetActive(false);
             GameStateManager.instance.BonusUI.SetActive(true);
 
-            Board.instance.StartBonus();
+            BoardCoOp.instance.StartBonus();
         }
         catch (System.Exception e)
         {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static BoardBase;
+using static BoardManager;
 
 public class Troopers : MonoBehaviour
 {

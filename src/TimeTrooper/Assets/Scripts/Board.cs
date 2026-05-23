@@ -58,7 +58,7 @@ public class Board : BoardBase
 
     //Troopers troopers;
     BoardSetupMulti boardSetup;
-    List<Tile> nextTiles;
+    //List<Tile> nextTiles;
     List<Tile> currentTiles;
 
     Coroutine playCountDownRoutine;
@@ -112,7 +112,7 @@ public class Board : BoardBase
     TroopersManager troppermanagerPPU;
     GameEngine gameengine;
     PlayersEngine playersengine;
-    List<Trooper> currenttroopers;
+    //List<Trooper> currenttroopers;
     GameRound currentround = null;
     Player currentplayer = null;
     List<string> txtNumbers = new List<string> { "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
@@ -126,12 +126,12 @@ public class Board : BoardBase
     private bool noNeedToDetectAgain = true;
     
 
-    Coroutine maketagdetectCoroutine = null;
+    //Coroutine maketagdetectCoroutine = null;
 
     bool competitiveMode = true;
 
     bool getTrooperRandomally = false;
-    bool orderTrooperMetter = false;
+    //bool orderTrooperMetter = false;
     bool trooperDisappear = false;
     Dictionary<string, string> detectTagsOrdered;
     Dictionary<string, string> detectTagsOrderedScore;
@@ -377,13 +377,13 @@ public class Board : BoardBase
             Debug.Log("Exit restartGame()");
         }
     }
-    public void MakeTagDetected()
+    /*public void MakeTagDetected()
     {
-        Debug.Log("Enter MakeTagDetected()");
+        Debug.Log("Enter Board MakeTagDetected()");
         try
         {
             AudioManager.instance.stopCountdown();
-            if(maketagdetectCoroutine != null)
+            if (maketagdetectCoroutine != null)
             {
                 StopCoroutine(maketagdetectCoroutine);
                 maketagdetectCoroutine = null;
@@ -401,7 +401,7 @@ public class Board : BoardBase
     }
     IEnumerator MakeTagDetectedFlow()
     {
-        Debug.Log("Enter MakeTagDetected(currenttroopers.Count,nextTiles.Count) " + currenttroopers.Count + " " + nextTiles.Count);
+        Debug.Log("Enter MakeTagDetectedFlow(currenttroopers.Count,nextTiles.Count) " + currenttroopers.Count + " " + nextTiles.Count);
 
         int trooperX = 0;
 
@@ -450,11 +450,11 @@ public class Board : BoardBase
 
         yield return null;
         
-        Debug.Log("Exit MakeTagDetected()");
-    }
-    public void allDetectedTags(string message)
+        Debug.Log("Exit MakeTagDetectedFlow()");
+    }*/
+    public override void allDetectedTags(string message)
     {
-        Debug.Log("Enter allDetectedTags() message-" + message);
+        Debug.Log("Enter Board allDetectedTags() message-" + message);
             
         try
         {
@@ -1316,7 +1316,7 @@ public class Board : BoardBase
     }
     IEnumerator WellDoneCountdown()
     {
-        Debug.Log("Enter WellDoneCountdown()");
+        Debug.Log("Enter Board.WellDoneCountdown()");
 
         float fill = 1f;
         ringMaterial.SetFloat("_Fill", fill);
@@ -1340,7 +1340,7 @@ public class Board : BoardBase
             fill -= step;
             ringMaterial.SetFloat("_Fill", fill);
         }
-
+        Debug.Log("gil1");
         ringMaterial.SetFloat("_Fill", 0f);
         if (currentplayer.lastPlayer == true)
         {
@@ -1376,7 +1376,7 @@ public class Board : BoardBase
             GameStateManagerMulti.instance.ChangeToGatReady(false);
         }
 
-        Debug.Log("Exit WellDoneCountdown()");
+        Debug.Log("Exit Board.WellDoneCountdown()");
     }
     /****************************
     * 
@@ -1710,9 +1710,9 @@ public class Board : BoardBase
             Debug.Log("Exit PlayCurrentMove()");
         }
     }
-    private void PlayTags(PPUData ppudata)
+    public virtual void PlayTags(PPUData ppudata)
     {
-        Debug.Log("Enter PlayTags()");
+        Debug.Log("Enter Board PlayTags()");
         try
         {
             if (orderTrooperMetter == false)

@@ -40,31 +40,35 @@ public class BoardSetupCoOp
     {
         tilesDictionary = new Dictionary<tilesLocation, Tile>();
 
-        tilesDictionary.Add(tilesLocation.TileOne, new Tile(new Vector2(-650f, 460f), 7));
-        tilesDictionary.Add(tilesLocation.TileTwo, new Tile(new Vector2(0f, 460f), 8));
-        tilesDictionary.Add(tilesLocation.TileThree, new Tile(new Vector2(650f, 460f), 9));
+        tilesDictionary.Add(tilesLocation.TileOne, new Tile(new Vector2(-700f, 460f), 1));
+        tilesDictionary.Add(tilesLocation.TileTwo, new Tile(new Vector2(-350f, 460f), 2));
+        tilesDictionary.Add(tilesLocation.TileThree, new Tile(new Vector2(0f, 460f), 3));
+        tilesDictionary.Add(tilesLocation.TileFour, new Tile(new Vector2(350f, 460f), 4));
+        tilesDictionary.Add(tilesLocation.TileFive, new Tile(new Vector2(700f, 460f), 5));
 
-        tilesDictionary.Add(tilesLocation.TileFour, new Tile(new Vector2(-650f, -200f), 12));
-        tilesDictionary.Add(tilesLocation.TileFive, new Tile(new Vector2(0f, -200f), 13));
-        tilesDictionary.Add(tilesLocation.TileSix, new Tile(new Vector2(650f, -200f), 14));
+        tilesDictionary.Add(tilesLocation.TileSix, new Tile(new Vector2(-700f, 150f), 6));
+        tilesDictionary.Add(tilesLocation.TileSeven, new Tile(new Vector2(-350f, 150f), 7));
+        tilesDictionary.Add(tilesLocation.TileEight, new Tile(new Vector2(0f, 150f), 8));
+        tilesDictionary.Add(tilesLocation.TileNine, new Tile(new Vector2(350f, 150f), 9));
+        tilesDictionary.Add(tilesLocation.TileTen, new Tile(new Vector2(700f, 150f), 10));
 
-        tilesDictionary.Add(tilesLocation.TileSeven, new Tile(new Vector2(-650f, -860f), 17));
-        tilesDictionary.Add(tilesLocation.TileEight, new Tile(new Vector2(0f, -860f), 18));
-        tilesDictionary.Add(tilesLocation.TileNine, new Tile(new Vector2(650f, -860f),19));
+        tilesDictionary.Add(tilesLocation.TileEleven, new Tile(new Vector2(-700f, -150f), 11));
+        tilesDictionary.Add(tilesLocation.TileTwelve, new Tile(new Vector2(-350f, -150f), 12));
+        tilesDictionary.Add(tilesLocation.TileThirteen, new Tile(new Vector2(0f, -150f), 13));
+        tilesDictionary.Add(tilesLocation.TileFourteen, new Tile(new Vector2(350f, -150f), 14));
+        tilesDictionary.Add(tilesLocation.TileFifteen, new Tile(new Vector2(700f, -150f), 15));
 
-        /*
-        tilesDictionary.Add(tilesLocation.TileOne, new Tile(new Vector2(-650f, 460f), 11));
-        tilesDictionary.Add(tilesLocation.TileTwo, new Tile(new Vector2(0f, 460f), 10));
-        tilesDictionary.Add(tilesLocation.TileThree, new Tile(new Vector2(650f, 460f), 9));
+        tilesDictionary.Add(tilesLocation.TileSixteen, new Tile(new Vector2(-700f, -500f), 16));
+        tilesDictionary.Add(tilesLocation.TileSeventeen, new Tile(new Vector2(-350f, -500f), 17));
+        tilesDictionary.Add(tilesLocation.TileEightteen, new Tile(new Vector2(0f, -500f), 18));
+        tilesDictionary.Add(tilesLocation.TileNineteen, new Tile(new Vector2(350f, -500f), 19));
+        tilesDictionary.Add(tilesLocation.TileTwenty, new Tile(new Vector2(700f, -500f), 20));
 
-        tilesDictionary.Add(tilesLocation.TileFour, new Tile(new Vector2(-650f, -200f), 8));
-        tilesDictionary.Add(tilesLocation.TileFive, new Tile(new Vector2(0f, -200f), 7));
-        tilesDictionary.Add(tilesLocation.TileSix, new Tile(new Vector2(650f, -200f), 6));
-
-        tilesDictionary.Add(tilesLocation.TileSeven, new Tile(new Vector2(-650f, -860f), 5));
-        tilesDictionary.Add(tilesLocation.TileEight, new Tile(new Vector2(0f, -860f), 4));
-        tilesDictionary.Add(tilesLocation.TileNine, new Tile(new Vector2(650f, -860f),3));
-         */
+        tilesDictionary.Add(tilesLocation.TileTwentyone, new Tile(new Vector2(-700f, -900f), 21));
+        tilesDictionary.Add(tilesLocation.TileTwentytwo, new Tile(new Vector2(-350f, -900f), 22));
+        tilesDictionary.Add(tilesLocation.TileTwentythree, new Tile(new Vector2(0f, -900f), 23));
+        tilesDictionary.Add(tilesLocation.TileTwentyfour, new Tile(new Vector2(350f, -900f), 24));
+        tilesDictionary.Add(tilesLocation.TileTwentyfive, new Tile(new Vector2(700f, -900f), 25));
 
         tiles = new List<Tile>(tilesDictionary.Values);
         currenttiles = null;
@@ -112,10 +116,10 @@ public class BoardSetupCoOp
         {
             for (int x = 0; x < 10; x++)
             {
-                int randomFrom = UnityEngine.Random.Range(0,9);
+                int randomFrom = UnityEngine.Random.Range(0,25);
                 Debug.Log("randomFrom-" + randomFrom);
                 Tile fromtile = tiles[randomFrom];
-                int randomTo = UnityEngine.Random.Range(0, 9);
+                int randomTo = UnityEngine.Random.Range(0, 25);
                 Tile totile = tiles[randomTo];
 
                 tiles[randomTo] = fromtile;

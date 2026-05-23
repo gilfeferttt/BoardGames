@@ -70,7 +70,8 @@ public class GameStateManagerMulti : MonoBehaviour
         Debug.Log("Enter ChangeToSelectModeMulti()");
         try
         {
-            Troopers.instance.setTroppersScale(BoardBase.GameMode.MultiMode);
+            Troopers.instance.setTroppersScale(BoardManager.GameMode.MultiMode);
+            BoardManager.instance.SetGameMode(BoardManager.GameMode.MultiMode);
             GameStateManager.instance.SelectModeUI.SetActive(false);
             ChangeToGetNames();
         }
@@ -100,24 +101,6 @@ public class GameStateManagerMulti : MonoBehaviour
         finally
         {
             Debug.Log("Exit ChangeToGetNames()");
-        }
-    }
-    
-    public void ChangeToStartMultiGame()
-    {
-        Debug.Log("Enter ChangeToStartMultiGame()");
-        try
-        {
-            Board.instance.SetGameMode(Board.GameMode.MultiMode);
-            ChangeToDemoScreen();
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Error: " + e.Message);
-        }
-        finally
-        {
-            Debug.Log("Exit ChangeToStartMultiGame()");
         }
     }
     

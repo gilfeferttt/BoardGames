@@ -53,7 +53,7 @@ public class BoardCoOp : BoardBase
 
     //Troopers troopers;
     BoardSetupCoOp boardSetup;
-    List<Tile> nextTiles;
+    //List<Tile> nextTiles;
     List<Tile> currentTiles;
 
     Coroutine playCountDownRoutine;
@@ -107,7 +107,7 @@ public class BoardCoOp : BoardBase
     TroopersManager troppermanagerPPU;
     //GameEngine gameengine;
     //PlayersEngine playersengine;
-    List<Trooper> currenttroopers;
+    //List<Trooper> currenttroopers;
     GameRound currentround = null;
     Player currentplayer = null;
     List<string> txtNumbers = new List<string> { "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
@@ -121,12 +121,12 @@ public class BoardCoOp : BoardBase
     private bool noNeedToDetectAgain = true;
 
 
-    Coroutine maketagdetectCoroutine = null;
+    //Coroutine maketagdetectCoroutine = null;
 
     bool competitiveMode = true;
 
     bool getTrooperRandomally = false;
-    bool orderTrooperMetter = false;
+    //bool orderTrooperMetter = false;
     bool trooperDisappear = false;
     Dictionary<string, string> detectTagsOrdered;
     Dictionary<string, string> detectTagsOrderedScore;
@@ -248,7 +248,7 @@ public class BoardCoOp : BoardBase
     PlayersEngine playersengine;
     //[SerializeField] protected GameObject troopersUI;
    // bool getTrooperRandomally = false;
-   // bool orderTrooperMetter = false;
+    //bool orderTrooperMetter = false;
    // bool trooperDisappear = false;
   //  Dictionary<string, string> detectTagsOrdered;
   //  Dictionary<string, string> detectTagsOrderedScore;
@@ -372,6 +372,103 @@ public class BoardCoOp : BoardBase
             Debug.Log("Exit Start()");
         }
     }
+    /*public void MakeTagDetected()
+    {
+        Debug.Log("Enter BoardCoOp MakeTagDetected()");
+        try
+        {
+            AudioManager.instance.stopCountdown();
+            if (maketagdetectCoroutine != null)
+            {
+                StopCoroutine(maketagdetectCoroutine);
+                maketagdetectCoroutine = null;
+            }
+            maketagdetectCoroutine = StartCoroutine(MakeTagDetectedFlow());
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error: " + e.Message);
+        }
+        finally
+        {
+            Debug.Log("Exit MakeTagDetected()");
+        }
+    }*/
+    public override void allDetectedTags(string message)
+    {
+        Debug.Log("Enter BoardCoOp allDetectedTags() message-" + message);
+
+        try
+        {
+            if (ingamenames == true)
+            {
+                Debug.Log("allDetectedTags - ingamenames");
+                // just detect the tropper set to play with
+                PPUData ppudata = ppumanager.getPPUData(message);
+                if (ppudata.pputags.Length > 0)
+                {
+                    Debug.Log("allDetectedTags - ingamenames - tag detected");
+                    isTagDetected.text = "Detected";
+                    currenttropperset = Troopers.instance.getTrooperSetByTagID(ppudata.pputags[0].id);
+                }
+            }
+            else
+            {
+                if (noNeedToDetectAgain == true)
+                {
+                    return;
+                }
+                if (lastDetectedMessage == null || lastDetectedMessage.CompareTo(message) != 0)
+                {
+                    lastDetectedMessage = message;
+                    PPUData ppudata = ppumanager.getPPUData(message);
+                    if (ppudata.pputags.Length > 0)
+                    {
+                        PlayTags(ppudata);
+                        TagDetectedStatus tagsDetectedStatus = calculateScore(ppudata);
+                        Debug.Log("tagsDetectedStatus-" + tagsDetectedStatus.ToString());
+                        if (tagsDetectedStatus == TagDetectedStatus.SameTag || tagsDetectedStatus == TagDetectedStatus.SameTagSameOrder)
+                        {
+                            Debug.Log("Tags are detected correctly");
+                            noNeedToDetectAgain = true;
+
+                            // Disable all antennas
+                            ppumanager.setAntennaLocation(new int[] { });
+
+                            if (playCountDownRoutine != null)
+                                StopCoroutine(playCountDownRoutine);
+
+                            currentplayer.points += currentRoundScore;
+
+                            setPointsOnTheBoard();
+
+                            txtRoundPoints.text = "+" + currentRoundScore;
+                            lock (syncTropperDetection)
+                            {
+                                if (tropperStillDetecting == true)
+                                {
+                                    tropperStillDetecting = false;
+                                    AudioManager.instance.playSuccess();
+                                    GameStateManagerCoOp.instance.ChangeToWellDone();
+
+                                    unPrintDetectedTrooperOnBoard();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error: " + e.Message);
+        }
+        finally
+        {
+            Debug.Log("Exit allDetectedTags()");
+        }
+    }
+
     private void setPointsOnTheBoard()
     {
         List<Player> players = playersengine.players;
@@ -753,7 +850,7 @@ public class BoardCoOp : BoardBase
         ringMaterial.SetFloat("_Fill", 0f);
 
         StartGameDificulty(gameengine.nextGameDificulty);
-        GameStateManagerMulti.instance.ChangeToGatReady(true);
+        GameStateManagerCoOp.instance.ChangeToGatReady(true);
 
         Debug.Log("Exit GetReadyCountdown()");
     }
@@ -821,8 +918,11 @@ public class BoardCoOp : BoardBase
             }
         }
 
+        Debug.Log("gil1");
         currenttroopers = Troopers.instance.getNextTroppers(currentround.NumberOfTroopers, getTrooperRandomally);
-
+        Debug.Log("gil2");
+        Debug.Log("currenttroopers.count-" + currenttroopers.Count);
+        Debug.Log("gil3");
         if (this.gameDificulty == GameDificulty.Basic)
         {
             // Get the next new trooper. Only in Basic or Advanced
@@ -1010,7 +1110,7 @@ public class BoardCoOp : BoardBase
 
                 setPointsOnTheBoard();
 
-                GameStateManagerMulti.instance.ChangeToFailRound();
+                GameStateManagerCoOp.instance.ChangeToFailRound();
 
                 unPrintDetectedTrooperOnBoard();
             }
@@ -1025,6 +1125,279 @@ public class BoardCoOp : BoardBase
      * 
      * 
      ***************************/
+    /****************************
+     * 
+     * 
+     * Well Done
+     * 
+     * 
+     ***************************/
+    public void StartWellDone()
+    {
+        Debug.Log("Enter StartWellDone()");
+
+        StartCoroutine(StartWellDoneFlow());
+
+        Debug.Log("Exit StartWellDone()");
+    }
+    IEnumerator StartWellDoneFlow()
+    {
+        Debug.Log("Enter StartWellDoneFlow()");
+
+
+        yield return StartCoroutine(StartWellDoneCountdown());
+
+        Debug.Log("Exit StartWellDoneFlow()");
+
+
+
+    }
+    IEnumerator StartWellDoneCountdown()
+    {
+        if (welldoneCountDownRoutine != null)
+            StopCoroutine(welldoneCountDownRoutine);
+
+        welldoneCountDownRoutine = StartCoroutine(WellDoneCountdown());
+
+        yield return welldoneCountDownRoutine;
+    }
+    IEnumerator WellDoneCountdown()
+    {
+        Debug.Log("Enter Board.WellDoneCountdown()");
+
+        float fill = 1f;
+        ringMaterial.SetFloat("_Fill", fill);
+
+        float stepTime = welldoneTotalTime / welldoneCountdownSteps;
+        float step = 1f / welldoneCountdownSteps;
+
+        // convert seconds → fill threshold
+        float warningFill = welldoneLastSecond / welldoneTotalTime;
+        ringMaterial.SetFloat("_WarningFill", warningFill);
+        countdownText.color = new Color(0f, 1f, 0f);
+
+        for (int i = 0; i < welldoneCountdownSteps; i++)
+        {
+            while (isPaused)
+            {
+                yield return null;
+            }
+            yield return new WaitForSeconds(stepTime);
+
+            fill -= step;
+            ringMaterial.SetFloat("_Fill", fill);
+        }
+        Debug.Log("gil1");
+        ringMaterial.SetFloat("_Fill", 0f);
+        if (currentplayer.lastPlayer == true)
+        {
+            /*List<Player> winnerplayers = playersengine.GetWinnerPlayers();
+            string playersnames = null;
+
+            txtBonusPoints.text = "+" + currentround.Bonuspoints;
+            foreach (Player winnerplayer in winnerplayers)
+            {
+                if (playersnames != null)
+                {
+                    playersnames += ", " + winnerplayer.Name;
+                }
+                else
+                {
+                    playersnames = winnerplayer.Name;
+                }
+                winnerplayer.points += currentround.Bonuspoints;
+            }
+            if (winnerplayers.Count == 2)
+            {
+                txtWinsRoundNumber.text = "Round " + currentround.Name + " is a tie!";
+            }
+            else
+            {
+                txtWinsRoundNumber.text = playersnames + " wins " + currentround.Name;
+            }*/
+            // Set the points on the board
+            setPointsOnTheBoard();
+            GameStateManagerCoOp.instance.ChangeToBonus();
+        }
+        else
+        {
+            //Turns[currentplayer.playerIndex].gameObject.SetActive(false);
+            //Turns[currentplayer.playerIndex + 1].gameObject.SetActive(true);
+            GameStateManagerCoOp.instance.ChangeToGatReady(false);
+        }
+
+        Debug.Log("Exit Board.WellDoneCountdown()");
+    }
+    /****************************
+    * 
+    * 
+    * Well Done
+    * 
+    * 
+    ***************************/
+
+    /****************************
+     * 
+     * 
+     * Fail Round
+     * 
+     * 
+     ***************************/
+    public void StartFailRound()
+    {
+        Debug.Log("Enter StartFailRound()");
+
+        StartCoroutine(StartFailRoundFlow());
+
+        Debug.Log("Exit StartFailRound()");
+    }
+    IEnumerator StartFailRoundFlow()
+    {
+        Debug.Log("Enter StartFailRoundFlow()");
+
+
+        yield return StartCoroutine(StartFailRoundCountdown());
+
+        Debug.Log("Exit StartFailRoundFlow()");
+
+
+
+    }
+    IEnumerator StartFailRoundCountdown()
+    {
+        if (failRoundCountDownRoutine != null)
+            StopCoroutine(failRoundCountDownRoutine);
+
+        countdownText.text = countdownCounter.ToString();
+
+        failRoundCountDownRoutine = StartCoroutine(FailRoundCountdown());
+
+        yield return failRoundCountDownRoutine;
+    }
+    IEnumerator FailRoundCountdown()
+    {
+        Debug.Log("Enter FailRoundCountdown()");
+
+        float fill = 1f;
+        ringMaterial.SetFloat("_Fill", fill);
+
+        float stepTime = failRoundTotalTime / failRoundCountdownSteps;
+        float step = 1f / failRoundCountdownSteps;
+
+        // convert seconds → fill threshold
+        float warningFill = failRoundLastSecond / failRoundTotalTime;
+        ringMaterial.SetFloat("_WarningFill", warningFill);
+        countdownText.color = new Color(0f, 1f, 0f);
+
+        for (int i = 0; i < failRoundCountdownSteps; i++)
+        {
+            while (isPaused)
+            {
+                yield return null;
+            }
+            yield return new WaitForSeconds(stepTime);
+
+            fill -= step;
+            ringMaterial.SetFloat("_Fill", fill);
+        }
+
+        ringMaterial.SetFloat("_Fill", 0f);
+        if (currentplayer.lastPlayer == true)
+        {
+            // Set the points on the board
+            setPointsOnTheBoard();
+            GameStateManagerCoOp.instance.ChangeToBonus();
+        }
+        else
+        {
+            //Turns[currentplayer.playerIndex].gameObject.SetActive(false);
+            //Turns[currentplayer.playerIndex + 1].gameObject.SetActive(true);
+            GameStateManagerCoOp.instance.ChangeToGatReady(false);
+        }
+        Debug.Log("Exit FailRoundCountdown()");
+    }
+    /****************************
+    * 
+    * 
+    * Fail Round
+    * 
+    * 
+    ***************************/
+
+    /****************************
+    * 
+    * 
+    * Bonus
+    * 
+    * 
+    ***************************/
+    public void StartBonus()
+    {
+        Debug.Log("Enter StartBonus()");
+        StartCoroutine(StartBonusFlow());
+        Debug.Log("Exit StartBonus()");
+    }
+    IEnumerator StartBonusFlow()
+    {
+        Debug.Log("Enter StartBonusFlow()");
+
+
+        yield return StartCoroutine(StartBonusCountdown());
+
+        Debug.Log("Exit StartBonusFlow()");
+
+
+
+    }
+    IEnumerator StartBonusCountdown()
+    {
+        if (getbonusCountDownRoutine != null)
+            StopCoroutine(getbonusCountDownRoutine);
+
+        getbonusCountDownRoutine = StartCoroutine(BonusCountdown());
+
+        yield return getbonusCountDownRoutine;
+    }
+    IEnumerator BonusCountdown()
+    {
+        Debug.Log("Enter BonusCountdown()");
+
+        float fill = 1f;
+        ringMaterial.SetFloat("_Fill", fill);
+
+        float stepTime = bonusTotalTime / bonusCountdownSteps;
+        float step = 1f / bonusCountdownSteps;
+
+        // convert seconds → fill threshold
+        float warningFill = bonusLastSecond / bonusTotalTime;
+        ringMaterial.SetFloat("_WarningFill", warningFill);
+        countdownText.color = new Color(0f, 1f, 0f);
+
+        for (int i = 0; i < bonusCountdownSteps; i++)
+        {
+            while (isPaused)
+            {
+                yield return null;
+            }
+            yield return new WaitForSeconds(stepTime);
+
+            fill -= step;
+            ringMaterial.SetFloat("_Fill", fill);
+        }
+
+        ringMaterial.SetFloat("_Fill", 0f);
+        //Turns[0].gameObject.SetActive(true);
+        //Turns[Convert.ToInt32(gamedata.numberOfPlayers) - 1].gameObject.SetActive(false);
+        GameStateManagerCoOp.instance.ChangeToGatReady(false);
+        Debug.Log("Exit BonusCountdown()");
+    }
+    /****************************
+    * 
+    * 
+    * Bonus
+    * 
+    * 
+    ***************************/
     /****************************
     * 
     * 
@@ -1131,9 +1504,9 @@ public class BoardCoOp : BoardBase
             Debug.Log("Exit PlayCurrentMove()");
         }
     }
-    private void PlayTags(PPUData ppudata)
+    public virtual void PlayTags(PPUData ppudata)
     {
-        Debug.Log("Enter PlayTags()");
+        Debug.Log("Enter BoardCoOp PlayTags()");
         try
         {
             if (orderTrooperMetter == false)
