@@ -3,7 +3,7 @@
     "m_SelectedProcess": {
         "deviceId": "RFCR30FNKME",
         "name": "com.twintera.boardsetup",
-        "processId": 22239,
+        "processId": 13086,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -925,6 +925,180 @@
             "name": "com.twintera.boardsetup",
             "processId": 22239,
             "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 21339,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 21996,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 22358,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 27794,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 29630,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 4172,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 5233,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 5887,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 6456,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 7158,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 7540,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 19514,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 21621,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 22177,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 23494,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 24179,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 24930,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 25290,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 1830,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 5755,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 19369,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 20697,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 27027,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 28099,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 10112,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 10585,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 11100,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 12103,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCR30FNKME",
+            "name": "com.twintera.boardsetup",
+            "processId": 13086,
+            "exited": false
         }
     ],
     "m_Tags": {
@@ -981,7 +1155,7 @@
         "AutoCapture": true
     },
     "m_FilterOptions": {
-        "m_Filter": "Enter before lockObject allDetectedTags(",
+        "m_Filter": "",
         "m_UseRegularExpressions": false,
         "m_MatchCase": false
     },

@@ -6,9 +6,14 @@ public enum GameState
     MainMenu,
     WiFi,
     Info,
+    Status,
     Antenna,
     Restart,
-    StatusUI,
+    WiFiStatusUI,
+    CheckP2V,
+    BoardNotFound,
+    BoardFound,
+    BoardReconnect,
     Unknown
 }
 public class GameStateManager : MonoBehaviour
@@ -22,9 +27,13 @@ public class GameStateManager : MonoBehaviour
     public GameObject mainMenuUI;
     public GameObject WiFiUI;
     public GameObject infoUI;
+    public GameObject statusUI;
+    public GameObject checkP2VUI;
     public GameObject antennaUI;
     public GameObject restartUI;
-    public GameObject statusUI;
+    public GameObject wifiStatusUI;
+    public GameObject boardNotFoundUI;
+    public GameObject reconnectingUI;
 
     public GameObject inGameStatusBar;
 
@@ -72,6 +81,23 @@ public class GameStateManager : MonoBehaviour
             Debug.Log("Exit ChangeToRFID()");
         }
     }
+    public void ChangeToStatus()
+    {
+        Debug.Log("Enter ChangeToStatus()");
+        try
+        {
+            BoardGenerator.instance.getBoardStatus();
+            ChangeState(GameState.Status);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error: " + e.Message);
+        }
+        finally
+        {
+            Debug.Log("Exit ChangeToStatus()");
+        }
+    }
     public void ChangeToInfo()
     {
         Debug.Log("Enter ChangeToInfo()");
@@ -87,6 +113,38 @@ public class GameStateManager : MonoBehaviour
         finally
         {
             Debug.Log("Exit ChangeToInfo()");
+        }
+    }
+    public void ChangeToP2V()
+    {
+        Debug.Log("Enter ChangeToP2V()");
+        try
+        {
+            ChangeState(GameState.CheckP2V);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error: " + e.Message);
+        }
+        finally
+        {
+            Debug.Log("Exit ChangeToP2V()");
+        }
+    }
+    public void ChangeToCheckP2V()
+    {
+        Debug.Log("Enter ChangeToCheckP2V()");
+        try
+        {
+            BoardGenerator.instance.checkP2V();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error: " + e.Message);
+        }
+        finally
+        {
+            Debug.Log("Exit ChangeToCheckP2V()");
         }
     }
     public void ChangeToMainMenu()
@@ -129,7 +187,9 @@ public class GameStateManager : MonoBehaviour
         Debug.Log("Enter ChangeToReconnect()");
         try
         {
-            BoardGenerator.instance.ReconnectToPPU();
+            boardNotFoundUI.SetActive(false);
+            reconnectingUI.SetActive(true);
+            StartCoroutine(TrasitionToReconnect());
         }
         catch (System.Exception e)
         {
@@ -138,6 +198,20 @@ public class GameStateManager : MonoBehaviour
         finally
         {
             Debug.Log("Exit ChangeToReconnect()");
+        }
+    }
+    private IEnumerator TrasitionToReconnect()
+    {
+        Debug.Log("Enter TrasitionToReconnect()");
+        try
+        {
+            yield return new WaitForSeconds(1);
+
+            BoardGenerator.instance.ReconnectToPPU();
+        }
+        finally
+        {
+            Debug.Log("Exit TrasitionToReconnect()");
         }
     }
     public void ChangeToSetWiFi()
@@ -156,12 +230,12 @@ public class GameStateManager : MonoBehaviour
             Debug.Log("Exit ChangeToSetWiFi()");
         }
     }
-    public void ChangeToSetRFID()
+    public void ChangeToSetRFIDDetectionMode()
     {
-        Debug.Log("Enter ChangeToSetRFID()");
+        Debug.Log("Enter ChangeToSetRFIDDetectionMode()");
         try
         {
-            BoardGenerator.instance.setRFIDConfiguration();
+            BoardGenerator.instance.setRFIDDetectionMode();
         }
         catch (System.Exception e)
         {
@@ -169,7 +243,7 @@ public class GameStateManager : MonoBehaviour
         }
         finally
         {
-            Debug.Log("Exit ChangeToSetRFID()");
+            Debug.Log("Exit ChangeToSetRFIDDetectionMode()");
         }
     }
     public void ChangeToSetAntLoc()
@@ -186,6 +260,22 @@ public class GameStateManager : MonoBehaviour
         finally
         {
             Debug.Log("Exit ChangeToSetAntLoc()");
+        }
+    }
+    public void ChangeToSetRFPower()
+    {
+        Debug.Log("Enter ChangeToSetAntLoc()");
+        try
+        {
+            BoardGenerator.instance.setRFPower();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error: " + e.Message);
+        }
+        finally
+        {
+            Debug.Log("Exit ChangeToSetRFPower()");
         }
     }
     public void AddInGameStatusBar()
@@ -297,6 +387,14 @@ public class GameStateManager : MonoBehaviour
                     if (infoUI)
                         infoUI.SetActive(true);
                     break;
+                case GameState.Status:
+                    if (statusUI)
+                        statusUI.SetActive(true);
+                    break;
+                case GameState.CheckP2V:
+                    if (checkP2VUI)
+                        checkP2VUI.SetActive(true);
+                    break;
                 case GameState.Antenna:
                     if (antennaUI)
                         antennaUI.SetActive(true);
@@ -309,9 +407,23 @@ public class GameStateManager : MonoBehaviour
                     if (restartUI)
                         restartUI.SetActive(true);
                     break;
-                case GameState.StatusUI:
-                    if (statusUI)
-                        statusUI.SetActive(true);
+                case GameState.BoardNotFound:
+                    if (boardNotFoundUI && reconnectingUI)
+                    {
+                        reconnectingUI.SetActive(false);
+                        boardNotFoundUI.SetActive(true);
+                    }
+                    break;
+                case GameState.BoardFound:
+                    if (reconnectingUI && mainMenuUI)
+                    {
+                        reconnectingUI.SetActive(false);
+                        mainMenuUI.SetActive(true);
+                    }
+                    break;
+                case GameState.WiFiStatusUI:
+                    if (wifiStatusUI)
+                        wifiStatusUI.SetActive(true);
                     break;
             }
         }
